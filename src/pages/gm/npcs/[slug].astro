@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from 'astro:content';
+import QuoteCallout from '../../../components/QuoteCallout.astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const npcs = await getCollection('npcs');
+  return npcs.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.gm_summary}
+  eyebrow="GM NPC file"
+  audience="gm"
+  spoilerLevel="major"
+  theme="gm"
+>
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Public Face</p>
+      <p>{entry.data.public_summary}</p>
+      <h3>Hidden Truth</h3>
+      <p>{entry.data.gm_summary}</p>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Stat Block</p>
+      <ul>
+        <li><strong>Defense:</strong> {entry.data.stat_block.defense}</li>
+        <li><strong>Grit:</strong> {entry.data.stat_block.grit}</li>
+        <li><strong>Will:</strong> {entry.data.stat_block.will}</li>
+        <li><strong>Signature Move:</strong> {entry.data.stat_block.signature_move}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Motivations And Relationships</p>
+      <p>{entry.data.campaign_arc}</p>
+      <ul>
+        {entry.data.relationships.map((relationship) => (
+          <li>
+            <strong>{relationship.name}:</strong> {relationship.relationship} ·{' '}
+            {relationship.summary}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Voice Guide</p>
+      <p>{entry.data.voice}</p>
+      <h3>Signature Phrases</h3>
+      <ul>
+        {entry.data.signature_phrases.map((line) => (
+          <li>{line}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Quote Bank</p>
+    <QuoteCallout quote={entry.data.quotes.angry[0]} attribution={`${entry.data.title} · angry`} variant="red" />
+    <QuoteCallout quote={entry.data.quotes.vulnerable[0]} attribution={`${entry.data.title} · vulnerable`} variant="dark" />
+    <QuoteCallout quote={entry.data.quotes.prophetic[0]} attribution={`${entry.data.title} · prophetic`} variant="beam" />
+  </section>
+
+  <article class="section content-prose">
+    <Content />
+  </article>
+</ContentLayout>

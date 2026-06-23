@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import DownloadCard from '../components/DownloadCard.astro';
+import ContentLayout from '../layouts/ContentLayout.astro';
+
+const downloads = await getCollection('downloads');
+const categories = [...new Set(downloads.map((entry) => entry.data.category))];
+---
+
+<ContentLayout
+  title="Downloads"
+  summary="Quickstarts, character tools, cheat sheets, and GM packets collected in one place."
+  eyebrow="Download library"
+  audience="public"
+>
+  {categories.map((category) => (
+    <section class="section">
+      <p class="section-label">{category}</p>
+      <div class="card-grid">
+        {downloads
+          .filter((entry) => entry.data.category === category)
+          .map((entry) => (
+            <DownloadCard
+              title={entry.data.title}
+              summary={entry.data.summary}
+              filePath={entry.data.file_path}
+              fileType={entry.data.file_type}
+              audience={entry.data.audience}
+              spoilerLevel={entry.data.spoiler_level}
+            />
+          ))}
+      </div>
+    </section>
+  ))}
+</ContentLayout>

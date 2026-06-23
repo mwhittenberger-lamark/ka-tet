@@ -1,0 +1,55 @@
+---
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+---
+
+<ContentLayout
+  title="GM Dashboard"
+  summary="A spoiler-heavy hub for running Johnny Minor, managing adventures, tracking NPC secrets, and keeping the table tense without losing clarity."
+  eyebrow="GM only"
+  audience="gm"
+  spoilerLevel="major"
+  theme="gm"
+>
+  <section class="section content-prose">
+    <p class="content-lead">
+      This section assumes spoiler access. It is designed as the source of truth for act structure,
+      hidden motivations, module flow, encounter tone, and recurring campaign symbols.
+    </p>
+  </section>
+
+  <section class="section">
+    <CardGrid
+      cards={[
+        {
+          title: 'Johnny Minor Campaign',
+          summary: 'Act-by-act truth, secrets, and endgame pressure.',
+          href: '/gm/campaigns/johnny-minor',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+        {
+          title: 'Adventure Modules',
+          summary: 'Scene order, read-aloud text, checks, rewards, and fallout.',
+          href: '/gm/adventures/rose-creek-way-of-dust-and-fire',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+        {
+          title: 'NPC Secrets',
+          summary: 'Voice notes, motives, betrayals, and stat-facing reminders.',
+          href: '/gm/npcs/johnny-minor',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+        {
+          title: 'GM Tools',
+          summary: 'Prep templates, random tables, stress prompts, and demo checklists.',
+          href: '/gm/tools',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+      ]}
+    />
+  </section>
+</ContentLayout>

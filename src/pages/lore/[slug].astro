@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const lore = await getCollection('lore');
+  return lore.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const rules = await getCollection('rules');
+const adventures = await getCollection('adventures');
+const relatedRules = rules.filter((rule) => entry.data.related_rules.includes(rule.data.slug));
+const relatedAdventures = adventures.filter((adventure) =>
+  entry.data.related_adventures.includes(adventure.data.slug),
+);
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.summary}
+  eyebrow={entry.data.category}
+  audience={entry.data.audience}
+  spoilerLevel={entry.data.spoiler_level}
+>
+  <article class="section content-prose">
+    <Content />
+  </article>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Why It Matters In Play</p>
+      <p>
+        Use this lore page to keep table language consistent, ground player expectations, and give
+        strange scenes a shared vocabulary without overexplaining the mystery.
+      </p>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Tags</p>
+      <div class="tag-list">
+        {entry.data.tags.map((tag) => (
+          <span>{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {(relatedRules.length > 0 || relatedAdventures.length > 0) && (
+    <section class="split">
+      {relatedRules.length > 0 && (
+        <div class="section">
+          <p class="section-label">Related Rules</p>
+          <CardGrid
+            cards={relatedRules.map((rule) => ({
+              title: rule.data.title,
+              summary: rule.data.summary,
+              href: `/player-guide/rules/${rule.data.slug}/`,
+              audience: 'player' as const,
+            }))}
+          />
+        </div>
+      )}
+      {relatedAdventures.length > 0 && (
+        <div class="section">
+          <p class="section-label">Related Adventures</p>
+          <CardGrid
+            cards={relatedAdventures.map((adventure) => ({
+              title: adventure.data.title,
+              summary: adventure.data.summary_player_safe,
+              href: `/adventures/${adventure.data.slug}/`,
+              audience: adventure.data.audience,
+              spoilerLevel: adventure.data.spoiler_level,
+            }))}
+          />
+        </div>
+      )}
+    </section>
+  )}
+</ContentLayout>

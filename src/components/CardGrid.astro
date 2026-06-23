@@ -1,0 +1,30 @@
+---
+export type Card = {
+  title: string;
+  summary: string;
+  href: string;
+  icon?: string;
+  audience?: 'public' | 'player' | 'gm';
+  spoilerLevel?: 'none' | 'light' | 'major';
+};
+
+type Props = {
+  cards: Card[];
+};
+
+const { cards } = Astro.props;
+---
+
+<div class="card-grid">
+  {cards.map((card) => (
+    <a class="card" href={card.href}>
+      <div class="card__meta">
+        <span>{card.icon ?? '◆'}</span>
+        {card.audience && <span>{card.audience}</span>}
+        {card.spoilerLevel && <span>{card.spoilerLevel}</span>}
+      </div>
+      <h3>{card.title}</h3>
+      <p>{card.summary}</p>
+    </a>
+  ))}
+</div>

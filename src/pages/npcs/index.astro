@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const npcs = await getCollection('npcs');
+---
+
+<ContentLayout
+  title="NPC Codex"
+  summary="Player-safe NPC profiles for the Johnny Minor campaign, written to support table recall without spoiling the arc."
+  eyebrow="Character index"
+  audience="player"
+  spoilerLevel="light"
+>
+  <section class="section content-prose">
+    <p>
+      NPC pages emphasize voice, role, and emotional function at the table. Secret agendas,
+      betrayals, and endgame truths stay on the GM side.
+    </p>
+  </section>
+
+  <section class="section">
+    <CardGrid
+      cards={npcs.map((entry) => ({
+        title: entry.data.title,
+        summary: entry.data.public_summary,
+        href: `/npcs/${entry.data.slug}/`,
+        audience: 'player' as const,
+        spoilerLevel: entry.data.spoiler_level,
+      }))}
+    />
+  </section>
+</ContentLayout>

@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import ArchetypeCard from '../../../components/ArchetypeCard.astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+const archetypes = await getCollection('archetypes');
+---
+
+<ContentLayout
+  title="Archetypes"
+  summary="Choose your class by fantasy, complexity, combat role, and what kind of story pressure you want to carry."
+  eyebrow="Player options"
+  audience="player"
+>
+  <section class="section content-prose">
+    <p class="section-label">What Are Archetypes?</p>
+    <p>
+      Archetypes are both your mechanical chassis and your dramatic angle. Pick the one that sounds
+      fun to play in a fight and compelling to live with between fights.
+    </p>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Comparison Table</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Archetype</th>
+          <th>Complexity</th>
+          <th>Primary Stats</th>
+          <th>Combat Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        {archetypes.map((entry) => (
+          <tr>
+            <td>{entry.data.title}</td>
+            <td>{entry.data.complexity}</td>
+            <td>{entry.data.primary_stats.join(', ')}</td>
+            <td>{entry.data.combat_role}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card-grid">
+    {archetypes.map((entry) => (
+      <ArchetypeCard
+        title={entry.data.title}
+        summary={entry.data.summary}
+        href={`/player-guide/archetypes/${entry.data.slug}/`}
+        primaryStats={entry.data.primary_stats}
+        complexity={entry.data.complexity}
+        combatRole={entry.data.combat_role}
+      />
+    ))}
+  </section>
+</ContentLayout>

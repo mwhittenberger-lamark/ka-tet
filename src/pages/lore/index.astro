@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const lore = await getCollection('lore');
+const categories = [...new Set(lore.map((entry) => entry.data.category))];
+---
+
+<ContentLayout
+  title="Lore"
+  summary="A player-safe encyclopedia for cosmology, places, factions, and the world-rules vocabulary that shapes play."
+  eyebrow="Encyclopedia"
+  audience="public"
+>
+  <section class="section content-prose">
+    <p>
+      The lore section explains what players need without assuming deep familiarity. Start with
+      cosmology if you want the big picture, or jump to places and factions if you want grounded
+      context for scenes and character choices.
+    </p>
+  </section>
+
+  {categories.map((category) => (
+    <section class="section">
+      <p class="section-label">{category}</p>
+      <CardGrid
+        cards={lore
+          .filter((entry) => entry.data.category === category)
+          .map((entry) => ({
+            title: entry.data.title,
+            summary: entry.data.summary,
+            href: `/lore/${entry.data.slug}/`,
+            audience: entry.data.audience,
+            spoilerLevel: entry.data.spoiler_level,
+          }))}
+      />
+    </section>
+  ))}
+</ContentLayout>

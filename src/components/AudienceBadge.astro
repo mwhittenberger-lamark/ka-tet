@@ -1,0 +1,15 @@
+---
+type Props = {
+  audience: 'public' | 'player' | 'gm';
+  spoilerLevel?: 'none' | 'light' | 'major';
+};
+
+const { audience, spoilerLevel = 'none' } = Astro.props;
+---
+
+<div class="audience-badge">
+  <span class:list={['audience-pill', `audience-pill--${audience}`]}>{audience}</span>
+  <span class:list={['audience-pill', `spoiler-pill--${spoilerLevel}`]}>
+    Spoilers: {spoilerLevel}
+  </span>
+</div>

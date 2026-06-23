@@ -1,0 +1,14 @@
+---
+type Props = {
+  quote: string;
+  attribution?: string;
+  variant?: 'normal' | 'dark' | 'red' | 'beam';
+};
+
+const { quote, attribution, variant = 'normal' } = Astro.props;
+---
+
+<blockquote class:list={['quote-callout', `quote-callout--${variant}`]}>
+  <p>"{quote}"</p>
+  {attribution && <footer>{attribution}</footer>}
+</blockquote>

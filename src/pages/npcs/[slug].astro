@@ -1,0 +1,86 @@
+---
+import { getCollection, render } from 'astro:content';
+import QuoteCallout from '../../components/QuoteCallout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const npcs = await getCollection('npcs');
+  return npcs.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.public_summary}
+  eyebrow={entry.data.role}
+  audience="player"
+  spoilerLevel={entry.data.spoiler_level}
+>
+  <section class="split">
+    <div class="image-card">
+      <div>
+        <strong>{entry.data.title}</strong>
+        <p>{entry.data.subtitle}</p>
+      </div>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">At A Glance</p>
+      <ul>
+        <li><strong>Campaign:</strong> {entry.data.campaign}</li>
+        <li><strong>Role:</strong> {entry.data.role}</li>
+        <li><strong>Alignment:</strong> {entry.data.alignment}</li>
+        <li><strong>Archetype:</strong> {entry.data.archetype}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Public Summary</p>
+      <p>{entry.data.public_summary}</p>
+      <h3>Appearance</h3>
+      <p>{entry.data.appearance}</p>
+      <h3>Personality</h3>
+      <p>{entry.data.personality}</p>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Voice Guide</p>
+      <p>{entry.data.voice}</p>
+      <h3>Signature Phrases</h3>
+      <ul>
+        {entry.data.signature_phrases.map((line) => (
+          <li>{line}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <QuoteCallout quote={entry.data.quotes.calm[0]} attribution={entry.data.title} variant="normal" />
+
+  <section class="section content-prose">
+    <p class="section-label">Known Relationships</p>
+    {entry.data.relationships.length > 0 ? (
+      <ul>
+        {entry.data.relationships.map((relationship) => (
+          <li>
+            <strong>{relationship.name}:</strong> {relationship.summary}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>No public relationship notes yet.</p>
+    )}
+    <h3>Campaign Role</h3>
+    <p>{entry.data.campaign_arc}</p>
+  </section>
+
+  <article class="section content-prose">
+    <Content />
+  </article>
+</ContentLayout>

@@ -1,0 +1,40 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/global.css';
+
+type Props = {
+  title: string;
+  description?: string;
+  theme?: 'public' | 'gm';
+};
+
+const { title, description, theme = 'public' } = Astro.props;
+const pageTitle = `${title} | Ka-Tet`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta
+      name="description"
+      content={
+        description ??
+        'Fan-made tabletop RPG and campaign site for Ka-Tet: The Path of the Beam.'
+      }
+    />
+  </head>
+  <body class:list={['site-shell', theme === 'gm' && 'site-shell--gm']}>
+    <div class="page-noise" aria-hidden="true"></div>
+    <SiteHeader theme={theme} />
+    <main class="page">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

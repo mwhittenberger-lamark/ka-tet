@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
+import QuoteCallout from '../../components/QuoteCallout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const campaign = (await getCollection('campaigns')).find((entry) => entry.data.slug === 'johnny-minor');
+if (!campaign) {
+  throw new Error('Johnny Minor campaign entry not found.');
+}
+---
+
+<ContentLayout
+  title={campaign.data.title}
+  summary={campaign.data.summary}
+  eyebrow="Featured campaign"
+  audience="player"
+  spoilerLevel="light"
+  ctaPrimary={{ label: 'Browse Pre-Gens', href: '/pregens' }}
+  ctaSecondary={{ label: 'Join a Game', href: '/join-a-game' }}
+>
+  <section class="section content-prose">
+    <p class="content-lead">{campaign.data.subtitle}</p>
+    <p>
+      Johnny Minor is the flagship player-safe campaign pitch: a road-song about a broken prophet,
+      a world held together by failing harmony, and a party that has to decide whether belief is a
+      virtue or a trap.
+    </p>
+  </section>
+
+  <QuoteCallout
+    quote="The song is breaking. Can you hear it?"
+    attribution="Johnny Minor"
+    variant="red"
+  />
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Themes</p>
+      <ul>
+        {campaign.data.themes.map((theme) => (
+          <li>{theme}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">What To Expect</p>
+      <ul>
+        {campaign.data.what_to_expect.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Act Structure</p>
+    {campaign.data.act_outline.map((act) => (
+      <div>
+        <h2>{act.title}</h2>
+        <p>{act.summary}</p>
+      </div>
+    ))}
+  </section>
+
+  <section class="section">
+    <p class="section-label">Character Fit And Table Expectations</p>
+    <CardGrid
+      cards={[
+        {
+          title: 'Character Fit',
+          summary: campaign.data.character_fit.join(' '),
+          href: '/player-guide/archetypes',
+          audience: 'player',
+        },
+        {
+          title: 'Table Expectations',
+          summary: campaign.data.table_expectations.join(' '),
+          href: '/start-here',
+          audience: 'player',
+        },
+        {
+          title: 'No Major Spoilers',
+          summary: 'This page avoids hidden identities, act-death turns, and endgame outcomes.',
+          href: '/gm/campaigns/johnny-minor',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+      ]}
+    />
+  </section>
+</ContentLayout>

@@ -1,0 +1,44 @@
+---
+type Cta = {
+  label: string;
+  href: string;
+};
+
+type Props = {
+  title: string;
+  subtitle?: string;
+  eyebrow?: string;
+  ctaPrimary?: Cta;
+  ctaSecondary?: Cta;
+  image?: string;
+};
+
+const { title, subtitle, eyebrow, ctaPrimary, ctaSecondary } = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero__copy">
+    {eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+    {(ctaPrimary || ctaSecondary) && (
+      <div class="hero__actions">
+        {ctaPrimary && (
+          <a class="button button--primary" href={ctaPrimary.href}>
+            {ctaPrimary.label}
+          </a>
+        )}
+        {ctaSecondary && (
+          <a class="button button--ghost" href={ctaSecondary.href}>
+            {ctaSecondary.label}
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+  <div class="hero__art" aria-hidden="true">
+    <span class="hero__beam" />
+    <span class="hero__rose" />
+    <span class="hero__door" />
+  </div>
+</section>

@@ -1,0 +1,17 @@
+---
+type Props = {
+  title: string;
+  points: string[];
+};
+
+const { title, points } = Astro.props;
+---
+
+<section class="rule-callout">
+  <p class="rule-callout__title">{title}</p>
+  <ul>
+    {points.map((point) => (
+      <li>{point}</li>
+    ))}
+  </ul>
+</section>

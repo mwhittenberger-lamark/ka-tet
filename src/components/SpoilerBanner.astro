@@ -1,0 +1,11 @@
+---
+type Props = {
+  text?: string;
+};
+
+const { text = 'GM ONLY — The Red Watches. This page contains campaign spoilers.' } = Astro.props;
+---
+
+<div class="spoiler-banner">
+  <strong>{text}</strong>
+</div>

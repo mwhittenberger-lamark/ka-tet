@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../../../components/CardGrid.astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+const rules = await getCollection('rules');
+const categories = [...new Set(rules.map((entry) => entry.data.category))];
+---
+
+<ContentLayout
+  title="Rules Overview"
+  summary="Core resolution, signature mechanics, combat, horror, and travel reference pages built for table use."
+  eyebrow="Rules reference"
+  audience="player"
+>
+  <section class="section content-prose">
+    <p class="section-label">Most Used Rules</p>
+    <p>
+      For most sessions, you will bounce between Core Rolls, Ka Points, Combat, Firearms, Fear and
+      Madness, and Travel. Everything else is supporting structure.
+    </p>
+  </section>
+
+  {categories.map((category) => (
+    <section class="section">
+      <p class="section-label">{category}</p>
+      <CardGrid
+        cards={rules
+          .filter((entry) => entry.data.category === category)
+          .map((entry) => ({
+            title: entry.data.title,
+            summary: entry.data.summary,
+            href: `/player-guide/rules/${entry.data.slug}/`,
+            audience: 'player' as const,
+            spoilerLevel: 'none' as const,
+          }))}
+      />
+    </section>
+  ))}
+</ContentLayout>

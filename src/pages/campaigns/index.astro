@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const [johnnyMinor] = await getCollection('campaigns');
+---
+
+<ContentLayout
+  title="Campaigns"
+  summary="Player-safe campaign pitches, demo entries, and future roads the site can grow into."
+  eyebrow="Campaign hub"
+  audience="public"
+>
+  <section class="section content-prose">
+    <p>
+      Campaign pages explain the premise, tone, and expected character fit without dropping table
+      spoilers. They exist to help players say yes confidently.
+    </p>
+  </section>
+
+  <section class="section">
+    <CardGrid
+      cards={[
+        {
+          title: johnnyMinor.data.title,
+          summary: johnnyMinor.data.summary,
+          href: '/campaigns/johnny-minor',
+          audience: 'player',
+          spoilerLevel: 'light',
+        },
+        {
+          title: 'Demo One-Shots',
+          summary: 'Low-prep entry points designed to recruit new players with almost no homework.',
+          href: '/demo',
+          audience: 'public',
+          spoilerLevel: 'none',
+        },
+        {
+          title: 'Future Campaigns',
+          summary: 'The site architecture is ready for more modules, campaign paths, and act timelines.',
+          href: '/gm',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+      ]}
+    />
+  </section>
+</ContentLayout>

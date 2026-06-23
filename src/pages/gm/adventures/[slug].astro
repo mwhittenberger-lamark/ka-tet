@@ -1,0 +1,117 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const adventures = await getCollection('adventures');
+  return adventures.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.summary_gm}
+  eyebrow={`${entry.data.act} · GM module`}
+  audience="gm"
+  spoilerLevel="major"
+  theme="gm"
+>
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Adventure Summary</p>
+      <p>{entry.data.summary_gm}</p>
+      <ul>
+        <li><strong>Level Range:</strong> {entry.data.level_range}</li>
+        <li><strong>Runtime:</strong> {entry.data.runtime}</li>
+        <li><strong>Tone:</strong> {entry.data.tone}</li>
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Hooks And Context</p>
+      <ul>
+        {entry.data.hooks.map((hook) => (
+          <li>{hook}</li>
+        ))}
+      </ul>
+      <h3>Major NPCs</h3>
+      <ul>
+        {entry.data.major_npcs.map((npc) => (
+          <li>{npc}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Locations</p>
+    <ul>
+      {entry.data.locations.map((location) => (
+        <li>{location}</li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Scene Details</p>
+    {entry.data.scenes.map((scene) => (
+      <div>
+        <h2>
+          Scene {scene.number}: {scene.title}
+        </h2>
+        <p><strong>Purpose:</strong> {scene.purpose}</p>
+        <p><strong>Read aloud:</strong> {scene.read_aloud}</p>
+        <p><strong>Combat:</strong> {scene.combat}</p>
+        <h3>GM Notes</h3>
+        <ul>
+          {scene.gm_notes.map((note) => (
+            <li>{note}</li>
+          ))}
+        </ul>
+        <h3>Skill Checks</h3>
+        <ul>
+          {scene.skill_checks.map((check) => (
+            <li>
+              <strong>{check.skill} DC {check.dc}:</strong> Success: {check.success} Failure:{' '}
+              {check.failure}
+            </li>
+          ))}
+        </ul>
+        <h3>Outcomes</h3>
+        <ul>
+          {scene.outcomes.map((outcome) => (
+            <li>{outcome}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Rewards</p>
+      <ul>
+        {entry.data.rewards.map((reward) => (
+          <li>{reward}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Campaign Echoes</p>
+      <ul>
+        {entry.data.campaign_echoes.map((echo) => (
+          <li>{echo}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <article class="section content-prose">
+    <Content />
+  </article>
+</ContentLayout>

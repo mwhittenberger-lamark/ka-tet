@@ -1,0 +1,45 @@
+---
+import AudienceBadge from '../components/AudienceBadge.astro';
+import Hero from '../components/Hero.astro';
+import SpoilerBanner from '../components/SpoilerBanner.astro';
+import BaseLayout from './BaseLayout.astro';
+
+type Props = {
+  title: string;
+  summary: string;
+  eyebrow?: string;
+  audience?: 'public' | 'player' | 'gm';
+  spoilerLevel?: 'none' | 'light' | 'major';
+  theme?: 'public' | 'gm';
+  ctaPrimary?: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
+};
+
+const {
+  title,
+  summary,
+  eyebrow,
+  audience = 'public',
+  spoilerLevel = 'none',
+  theme = audience === 'gm' ? 'gm' : 'public',
+  ctaPrimary,
+  ctaSecondary,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={summary} theme={theme}>
+  <section class="page-hero">
+    <AudienceBadge audience={audience} spoilerLevel={spoilerLevel} />
+    {audience === 'gm' && spoilerLevel === 'major' && <SpoilerBanner />}
+    <Hero
+      title={title}
+      subtitle={summary}
+      eyebrow={eyebrow}
+      ctaPrimary={ctaPrimary}
+      ctaSecondary={ctaSecondary}
+    />
+  </section>
+  <div class="content-shell">
+    <slot />
+  </div>
+</BaseLayout>

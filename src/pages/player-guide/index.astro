@@ -1,0 +1,62 @@
+---
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+---
+
+<ContentLayout
+  title="Player Guide"
+  summary="The player-facing rules hub for character creation, archetypes, core mechanics, and campaign-safe references."
+  eyebrow="Player reference"
+  audience="player"
+>
+  <section class="section content-prose">
+    <p class="content-lead">
+      This guide is organized for table use. Start with character creation if you are building
+      from scratch, or jump to pregens and Ka Points if you are joining a demo quickly.
+    </p>
+  </section>
+
+  <section class="section">
+    <CardGrid
+      cards={[
+        {
+          title: 'Character Creation',
+          summary: 'Follow the six-step path from concept to stats, gear, and ka-tet bonds.',
+          href: '/player-guide/character-creation',
+          audience: 'player',
+        },
+        {
+          title: 'Archetypes',
+          summary: 'Compare classes by fantasy, complexity, and combat role.',
+          href: '/player-guide/archetypes',
+          audience: 'player',
+        },
+        {
+          title: 'Core Rules',
+          summary: 'Read the most-used mechanics, including firearms, fear, and travel.',
+          href: '/player-guide/rules',
+          audience: 'player',
+        },
+        {
+          title: 'Ka Points',
+          summary: 'Learn the signature fate engine and how the tet shares it.',
+          href: '/player-guide/rules/ka-points',
+          audience: 'player',
+        },
+        {
+          title: 'Campaigns',
+          summary: 'Stay in player-safe territory while getting the pitch for Johnny Minor.',
+          href: '/campaigns/johnny-minor',
+          audience: 'player',
+          spoilerLevel: 'light',
+        },
+        {
+          title: 'Downloads',
+          summary: 'Grab the quickstart, pregens, and cheat sheets for live play.',
+          href: '/downloads',
+          audience: 'player',
+        },
+      ]}
+    />
+  </section>
+</ContentLayout>

@@ -1,0 +1,102 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+---
+
+<ContentLayout
+  title="Character Creation"
+  summary="Build a Ka-Tet character in six clear steps, then tie them to the party and the road ahead."
+  eyebrow="Player creation"
+  audience="player"
+>
+  <section class="section content-prose">
+    <p class="section-label">Six-Step Summary</p>
+    <ol>
+      <li>Choose a concept and world of origin.</li>
+      <li>Pick an archetype that matches your play style.</li>
+      <li>Assign ability scores to show strengths and weaknesses.</li>
+      <li>Choose background, gear, and a first personal scar.</li>
+      <li>Set derived stats, starting moves, and Ka.</li>
+      <li>Write one bond to another member of the ka-tet.</li>
+    </ol>
+  </section>
+
+  <section class="two-column">
+    <div class="section content-prose">
+      <p class="section-label">Ability Scores</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>Use It For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Strength</td><td>Force, endurance, brutal leverage</td></tr>
+          <tr><td>Dexterity</td><td>Aim, reflex, stealth, balance</td></tr>
+          <tr><td>Constitution</td><td>Survival, resilience, punishment</td></tr>
+          <tr><td>Intelligence</td><td>Recall, analysis, relic logic</td></tr>
+          <tr><td>Wisdom</td><td>Perception, instinct, reading the wrongness</td></tr>
+          <tr><td>Charisma</td><td>Presence, command, song, conviction</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section content-prose">
+      <p class="section-label">Starting Level Guidance</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>Recommended Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Intro Demo</td><td>3</td></tr>
+          <tr><td>Campaign Opening</td><td>1-3</td></tr>
+          <tr><td>Experienced Table</td><td>4-5</td></tr>
+        </tbody>
+      </table>
+      <p>
+        For the MVP site, level 3 is the sweet spot: enough signature identity to feel cool, not
+        so much complexity that new players bog down.
+      </p>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Background Examples</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Background</th>
+          <th>What It Suggests</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Road Medic</td><td>Healing under pressure, triage, grim calm</td></tr>
+        <tr><td>Choir Runaway</td><td>Faith, music, fear of authority</td></tr>
+        <tr><td>Ruin Courier</td><td>Maps, doors, smuggling, bad instincts turned useful</td></tr>
+        <tr><td>Failed Knight</td><td>Old vows, armor, unresolved duty</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Bond Questions</p>
+      <ul>
+        <li>Which member of the tet reminds you of someone you failed before?</li>
+        <li>Whose survival feels non-negotiable to you?</li>
+        <li>Who do you trust with your secret, and why?</li>
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Example Character</p>
+      <p>
+        Naomi Blueglass is a Singer from 1987 Harlem whose voice bends fear into stillness. Her
+        bond says she hears the same unfinished melody in one other party member, and she refuses
+        to let them face it alone.
+      </p>
+    </div>
+  </section>
+</ContentLayout>

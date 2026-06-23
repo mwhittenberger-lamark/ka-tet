@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../components/CardGrid.astro';
+import ContentLayout from '../layouts/ContentLayout.astro';
+
+const pregens = (await getCollection('pregens')).slice(0, 4);
+---
+
+<ContentLayout
+  title="Demo One-Shot"
+  summary="A low-homework entry point for new players who want the tone, the road, and the weirdness without a long commitment."
+  eyebrow="One-shot"
+  audience="public"
+  ctaPrimary={{ label: 'Join a Game', href: '/join-a-game' }}
+  ctaSecondary={{ label: 'Browse Pre-Gens', href: '/pregens' }}
+>
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">What To Expect</p>
+      <ul>
+        <li>Runtime of about three hours</li>
+        <li>No source-material knowledge required</li>
+        <li>Pregens provided and table help built in</li>
+        <li>Strange roads, a dangerous scene, and one memorable moral choice</li>
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Tone And Safety</p>
+      <p>
+        The demo carries melancholy, tension, and some horror imagery, but it is tuned to recruit
+        rather than overwhelm. Safety tools are assumed and explained before play begins.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Available Pre-Gens</p>
+    <CardGrid
+      cards={pregens.map((entry) => ({
+        title: entry.data.title,
+        summary: entry.data.one_line_pitch,
+        href: `/pregens/${entry.data.slug}/`,
+        audience: 'public' as const,
+      }))}
+    />
+  </section>
+</ContentLayout>

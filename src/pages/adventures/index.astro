@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const adventures = await getCollection('adventures');
+const publicAdventures = adventures.filter((entry) => entry.data.audience === 'player');
+const gmAdventures = adventures.filter((entry) => entry.data.audience === 'gm');
+---
+
+<ContentLayout
+  title="Adventure Library"
+  summary="Public demo-friendly adventures up front, with clearly marked GM-only modules waiting behind spoiler warnings."
+  eyebrow="Adventure index"
+  audience="public"
+>
+  <section class="section">
+    <p class="section-label">Public And Demo Adventures</p>
+    <CardGrid
+      cards={publicAdventures.map((entry) => ({
+        title: entry.data.title,
+        summary: entry.data.summary_player_safe,
+        href: `/adventures/${entry.data.slug}/`,
+        audience: 'public' as const,
+        spoilerLevel: entry.data.spoiler_level,
+      }))}
+    />
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">GM-Only Shelf</p>
+    <p>
+      Major spoiler modules are listed by title and tone here, but their full structure lives in
+      the GM section.
+    </p>
+    <CardGrid
+      cards={gmAdventures.map((entry) => ({
+        title: entry.data.title,
+        summary: `${entry.data.act} · ${entry.data.level_range} · ${entry.data.tone}`,
+        href: `/adventures/${entry.data.slug}/`,
+        audience: 'gm' as const,
+        spoilerLevel: entry.data.spoiler_level,
+      }))}
+    />
+  </section>
+</ContentLayout>

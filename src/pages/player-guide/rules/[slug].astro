@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from 'astro:content';
+import CardGrid from '../../../components/CardGrid.astro';
+import QuoteCallout from '../../../components/QuoteCallout.astro';
+import RuleCallout from '../../../components/RuleCallout.astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const rules = await getCollection('rules');
+  return rules.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const relatedRules = (await getCollection('rules')).filter(
+  (rule) => entry.data.related_rules.includes(rule.data.slug) && rule.data.slug !== entry.data.slug,
+);
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.summary}
+  eyebrow={entry.data.category}
+  audience="player"
+>
+  <RuleCallout title="Quick Reference" points={entry.data.quick_reference} />
+
+  <article class="section content-prose">
+    <Content />
+  </article>
+
+  <section class="split">
+    {entry.data.examples.map((example) => (
+      <div class="section content-prose">
+        <p class="section-label">Example In Play</p>
+        <h2>{example.title}</h2>
+        <p>{example.body}</p>
+      </div>
+    ))}
+  </section>
+
+  {entry.data.slug === 'ka-points' && (
+    <QuoteCallout
+      quote="Fate does not care whether you feel ready. It only cares whether you step."
+      attribution="GM framing note"
+      variant="beam"
+    />
+  )}
+
+  {relatedRules.length > 0 && (
+    <section class="section">
+      <p class="section-label">Related Rules</p>
+      <CardGrid
+        cards={relatedRules.map((rule) => ({
+          title: rule.data.title,
+          summary: rule.data.summary,
+          href: `/player-guide/rules/${rule.data.slug}/`,
+          audience: 'player' as const,
+        }))}
+      />
+    </section>
+  )}
+</ContentLayout>

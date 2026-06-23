@@ -1,0 +1,103 @@
+---
+import { getCollection, render } from 'astro:content';
+import CardGrid from '../../../components/CardGrid.astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const archetypes = await getCollection('archetypes');
+  return archetypes.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const relatedRules = (await getCollection('rules')).filter((rule) =>
+  entry.data.related_rules.includes(rule.data.slug),
+);
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.summary}
+  eyebrow="Archetype"
+  audience="player"
+>
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Player Fantasy</p>
+      <p>{entry.data.player_fantasy}</p>
+      <div class="stat-list">
+        <span>Primary: {entry.data.primary_stats.join(', ')}</span>
+        <span>Secondary: {entry.data.secondary_stats.join(', ')}</span>
+        <span>Hit Die: {entry.data.starting_hit_die}</span>
+        <span>Saves: {entry.data.saving_throws.join(', ')}</span>
+      </div>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Role In Play</p>
+      <ul>
+        <li><strong>Combat:</strong> {entry.data.combat_role}</li>
+        <li><strong>Narrative:</strong> {entry.data.narrative_role}</li>
+        <li><strong>Support:</strong> {entry.data.support_role}</li>
+        <li><strong>Complexity:</strong> {entry.data.complexity}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Core Features</p>
+    {entry.data.core_features.map((feature) => (
+      <div>
+        <h3>{feature.name} · Level {feature.level}</h3>
+        <p>{feature.summary}</p>
+        <p>{feature.rules_text}</p>
+      </div>
+    ))}
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Subclasses</p>
+      {entry.data.subclasses.map((subclass) => (
+        <div>
+          <h3>{subclass.name}</h3>
+          <p>{subclass.summary}</p>
+          <p><strong>Theme:</strong> {subclass.theme}</p>
+        </div>
+      ))}
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Starting Gear And Concepts</p>
+      <h3>Starting Equipment</h3>
+      <ul>
+        {entry.data.starting_equipment.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <h3>Sample Concepts</h3>
+      <ul>
+        {entry.data.sample_concepts.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <article class="section content-prose">
+    <Content />
+  </article>
+
+  <section class="section">
+    <p class="section-label">Related Rules</p>
+    <CardGrid
+      cards={relatedRules.map((rule) => ({
+        title: rule.data.title,
+        summary: rule.data.summary,
+        href: `/player-guide/rules/${rule.data.slug}/`,
+        audience: 'player' as const,
+      }))}
+    />
+  </section>
+</ContentLayout>

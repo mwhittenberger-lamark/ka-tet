@@ -1,0 +1,35 @@
+---
+import { mainNav, gmNav } from '../lib/navigation';
+---
+
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div>
+      <p class="footer-title">Ka-Tet: The Path of the Beam</p>
+      <p class="footer-copy">
+        Fan-made tabletop RPG and campaign resource for private play. Inspired by dark western
+        fantasy, cosmic horror, broken worlds, and fate-bound heroes.
+      </p>
+    </div>
+    <div>
+      <p class="footer-title">Explore</p>
+      <div class="footer-links">
+        {mainNav.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </div>
+    <div>
+      <p class="footer-title">GM</p>
+      <div class="footer-links">
+        {gmNav.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="site-footer__meta">
+    <span>Long days and pleasant nights.</span>
+    <span>Version 0.1 · Built with Astro</span>
+  </div>
+</footer>

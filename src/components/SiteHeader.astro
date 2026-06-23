@@ -1,0 +1,47 @@
+---
+import { mainNav } from '../lib/navigation';
+
+type Props = {
+  theme?: 'public' | 'gm';
+};
+
+const { theme = 'public' } = Astro.props;
+const isGm = theme === 'gm';
+const path = Astro.url.pathname;
+---
+
+<header class:list={['site-header', isGm && 'is-gm']}>
+  <div class="site-header__inner">
+    <a href="/" class="brand">
+      <span class="brand__eyebrow">Ka-Tet</span>
+      <span class="brand__title">The Path of the Beam</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main">
+      {mainNav.map((item) => (
+        <a class:list={['nav-link', path === item.href && 'is-active']} href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="header-actions">
+      <a class:list={['gm-link', path.startsWith('/gm') && 'is-active']} href="/gm">
+        GM
+      </a>
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <div class="mobile-nav__panel">
+          {mainNav.map((item) => (
+            <a class:list={['mobile-link', path === item.href && 'is-active']} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+          <a class:list={['mobile-link', path.startsWith('/gm') && 'is-active']} href="/gm">
+            GM Dashboard
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,25 @@
+---
+type Props = {
+  title: string;
+  summary: string;
+  filePath: string;
+  fileType: string;
+  audience: string;
+  spoilerLevel: string;
+};
+
+const { title, summary, filePath, fileType, audience, spoilerLevel } = Astro.props;
+---
+
+<article class="download-card">
+  <div class="download-card__meta">
+    <span>{fileType.toUpperCase()}</span>
+    <span>{audience}</span>
+    <span>{spoilerLevel}</span>
+  </div>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <a class="button button--ghost" href={filePath} download>
+    Download
+  </a>
+</article>

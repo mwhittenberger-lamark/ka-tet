@@ -1,0 +1,112 @@
+---
+import CardGrid from '../components/CardGrid.astro';
+import RuleCallout from '../components/RuleCallout.astro';
+import ContentLayout from '../layouts/ContentLayout.astro';
+---
+
+<ContentLayout
+  title="Start Here"
+  summary="A plain-language introduction for prospective players, curious friends, and demo guests."
+  eyebrow="New players"
+  audience="public"
+  ctaPrimary={{ label: 'Create a Character', href: '/player-guide/character-creation' }}
+  ctaSecondary={{ label: 'Pick a Pre-Gen', href: '/pregens' }}
+>
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">What Kind Of Game Is This?</p>
+      <h2>Weird western fantasy with cosmic horror and a shared destiny engine.</h2>
+      <p>
+        Players form a ka-tet: a small group bound together strongly enough to matter to the
+        universe. The tone mixes revolvers, songs, ruined roads, broken machinery, visions,
+        impossible doors, and hard moral choices.
+      </p>
+      <p>
+        You do not need to know the source material to play. The site is designed to teach the
+        setting through clear player-facing language.
+      </p>
+    </div>
+    <RuleCallout
+      title="What Players Do"
+      points={[
+        'Travel dangerous roads between worlds',
+        'Protect each other with Ka-Tet bonds',
+        'Face gunfights, thinnies, cults, ruins, and prophecy',
+        'Decide what saving the song is worth',
+      ]}
+    />
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Core Terms</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ka</td>
+          <td>Fate in motion. Not mercy, but pressure that keeps the wheel turning.</td>
+        </tr>
+        <tr>
+          <td>Ka-Tet</td>
+          <td>A group bound together deeply enough to become a force in the story.</td>
+        </tr>
+        <tr>
+          <td>Beam</td>
+          <td>A structural force holding worlds in harmony.</td>
+        </tr>
+        <tr>
+          <td>Thinny</td>
+          <td>A weak place in reality where the world starts sounding wrong.</td>
+        </tr>
+        <tr>
+          <td>Todash</td>
+          <td>The unstable between-space reached through certain doors and rituals.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">What A Session Feels Like</p>
+      <ul>
+        <li>A tense arrival in a town that already sounds half-broken</li>
+        <li>Quiet campfire talk that changes how the next fight lands</li>
+        <li>Sudden, dangerous violence where cover and nerve matter</li>
+        <li>A strange sign that makes the whole group rethink what it believes</li>
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Next Steps</p>
+      <CardGrid
+        cards={[
+          {
+            title: 'Create a Character',
+            summary: 'Build from concept to stats, equipment, and party bonds.',
+            href: '/player-guide/character-creation',
+          },
+          {
+            title: 'Pick a Pre-Gen',
+            summary: 'Jump into a demo with a polished ready-to-play character.',
+            href: '/pregens',
+          },
+          {
+            title: 'Read Ka Points',
+            summary: 'Understand the signature fate mechanic in two minutes.',
+            href: '/player-guide/rules/ka-points',
+          },
+          {
+            title: 'Join a Demo',
+            summary: 'Tell the GM what kind of game and schedule works for you.',
+            href: '/join-a-game',
+          },
+        ]}
+      />
+    </div>
+  </section>
+</ContentLayout>

@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../components/CardGrid.astro';
+import QuoteCallout from '../components/QuoteCallout.astro';
+import ContentLayout from '../layouts/ContentLayout.astro';
+
+const archetypes = (await getCollection('archetypes')).slice(0, 3);
+---
+
+<ContentLayout
+  title="Ka-Tet: The Path of the Beam"
+  summary="A fan-made tabletop RPG of gunslingers, haunted doors, dying worlds, psychic songs, and ka-tets bound by fate."
+  eyebrow="Recovered field manual"
+  audience="public"
+  ctaPrimary={{ label: 'Start Here', href: '/start-here' }}
+  ctaSecondary={{ label: 'Join a Demo Game', href: '/demo' }}
+>
+  <section class="section content-prose">
+    <p class="content-lead">
+      Ka-Tet is built to function as a public pitch site, a player rules reference, and a GM
+      archive for a strange-road campaign full of prophecy, old codes, cosmic horror, and
+      impossible music.
+    </p>
+    <p>
+      At the table, players form a ka-tet bound by fate. They travel broken worlds, protect what
+      still matters, and decide whether the Tower, the Beams, and the song beneath reality can
+      still be saved.
+    </p>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Start Here</p>
+    <CardGrid
+      cards={[
+        {
+          title: 'Start Here',
+          summary: 'Learn the premise, the terms, and what play feels like in five minutes.',
+          href: '/start-here',
+          icon: '↗',
+        },
+        {
+          title: 'Player Guide',
+          summary: 'Get the rulebook-facing overview for character creation, archetypes, and core play.',
+          href: '/player-guide',
+          icon: '✦',
+        },
+        {
+          title: 'Campaigns',
+          summary: 'Browse the player-safe pitch for Johnny Minor and future campaign arcs.',
+          href: '/campaigns',
+          icon: '☍',
+        },
+        {
+          title: 'Downloads',
+          summary: 'Grab quickstarts, pregens, cheat sheets, and GM packets.',
+          href: '/downloads',
+          icon: '⬇',
+        },
+      ]}
+    />
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">What Makes It Distinct</p>
+      <h2>Dead western grit, haunted music, and cosmic decay.</h2>
+      <ul>
+        <li>Play gunslingers, singers, walkers, and strange survivors from many worlds.</li>
+        <li>Use Ka Points and bonds to turn fate and loyalty into mechanics.</li>
+        <li>Travel through doors, thinnies, failing roads, and doomed towns.</li>
+        <li>Balance mythic heroism with horror, doubt, and hard choices.</li>
+      </ul>
+    </div>
+    <div class="section">
+      <p class="section-label">Archetype Sampler</p>
+      <CardGrid
+        cards={archetypes.map((entry) => ({
+          title: entry.data.title,
+          summary: entry.data.summary,
+          href: `/player-guide/archetypes/${entry.data.slug}/`,
+          icon: entry.data.title[0],
+          audience: 'player' as const,
+          spoilerLevel: 'none' as const,
+        }))}
+      />
+    </div>
+  </section>
+
+  <QuoteCallout
+    quote="Ka's not mercy, child. It's just motion. Like a wheel. Like a clock. Like a bullet."
+    attribution="Johnny Minor"
+    variant="beam"
+  />
+
+  <section class="section content-prose">
+    <p class="section-label">Demo Friendly</p>
+    <h2>New players can join with almost no prep.</h2>
+    <p>
+      The site is structured so someone can read the Start Here page, pick a pre-generated
+      character, skim Ka Points, and sit down for a one-shot without needing deep lore homework.
+    </p>
+    <div class="button-row">
+      <a class="button button--primary" href="/demo">Try the Demo One-Shot</a>
+      <a class="button button--ghost" href="/join-a-game">Join a Game</a>
+    </div>
+  </section>
+</ContentLayout>

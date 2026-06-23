@@ -1,0 +1,72 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import SpoilerBanner from '../../components/SpoilerBanner.astro';
+
+export async function getStaticPaths() {
+  const adventures = await getCollection('adventures');
+  return adventures.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const isSpoilerHeavy = entry.data.audience === 'gm' || entry.data.spoiler_level === 'major';
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.summary_player_safe}
+  eyebrow={`${entry.data.act} · Levels ${entry.data.level_range}`}
+  audience={isSpoilerHeavy ? 'gm' : 'public'}
+  spoilerLevel={entry.data.spoiler_level}
+  theme={isSpoilerHeavy ? 'gm' : 'public'}
+>
+  {isSpoilerHeavy ? (
+    <>
+      <section class="section content-prose">
+        <SpoilerBanner text="Spoiler-guarded module. This public route only shows a teaser." />
+        <p>
+          <strong>Tone:</strong> {entry.data.tone}
+        </p>
+        <p>
+          <strong>Runtime:</strong> {entry.data.runtime}
+        </p>
+        <p>{entry.data.summary_player_safe}</p>
+        <p>
+          Full scene structure, secrets, and consequences live in the GM module view at
+          <a class="kicker" href={`/gm/adventures/${entry.data.slug}/`}>
+            /gm/adventures/{entry.data.slug}
+          </a>.
+        </p>
+      </section>
+    </>
+  ) : (
+    <>
+      <section class="split">
+        <div class="section content-prose">
+          <p class="section-label">What It Is</p>
+          <p>{entry.data.summary_player_safe}</p>
+          <ul>
+            <li><strong>Campaign:</strong> {entry.data.campaign}</li>
+            <li><strong>Tone:</strong> {entry.data.tone}</li>
+            <li><strong>Runtime:</strong> {entry.data.runtime}</li>
+          </ul>
+        </div>
+        <div class="section content-prose">
+          <p class="section-label">Hooks</p>
+          <ul>
+            {entry.data.hooks.map((hook) => (
+              <li>{hook}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <article class="section content-prose">
+        <Content />
+      </article>
+    </>
+  )}
+</ContentLayout>

@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import QuoteCallout from '../../components/QuoteCallout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const pregens = await getCollection('pregens');
+  return pregens.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<ContentLayout
+  title={entry.data.title}
+  summary={entry.data.one_line_pitch}
+  eyebrow={`${entry.data.archetype} · Level ${entry.data.level}`}
+  audience="public"
+  ctaPrimary={{ label: 'Download Sheet', href: entry.data.sheet_download }}
+  ctaSecondary={{ label: 'Join the Demo', href: '/join-a-game' }}
+>
+  <section class="split">
+    <div class="image-card">
+      <div>
+        <strong>{entry.data.title}</strong>
+        <p>{entry.data.world_of_origin}</p>
+      </div>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">At A Glance</p>
+      <ul>
+        <li><strong>Archetype:</strong> {entry.data.archetype}</li>
+        <li><strong>Complexity:</strong> {entry.data.complexity}</li>
+        <li><strong>World:</strong> {entry.data.world_of_origin}</li>
+        <li><strong>Personality:</strong> {entry.data.personality}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">What You Are Good At</p>
+      <ul>
+        {entry.data.what_you_are_good_at.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <h3>Starting Moves</h3>
+      <ul>
+        {entry.data.starting_moves.map((move) => (
+          <li>{move}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Secret And Bond</p>
+      <p><strong>Secret:</strong> {entry.data.secret}</p>
+      <p><strong>Bond To The Tet:</strong> {entry.data.bond_to_tet}</p>
+    </div>
+  </section>
+
+  <QuoteCallout quote={entry.data.quote} attribution={entry.data.title} variant="beam" />
+
+  <article class="section content-prose">
+    <Content />
+  </article>
+</ContentLayout>

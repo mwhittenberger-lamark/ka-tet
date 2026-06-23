@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const pregens = await getCollection('pregens');
+---
+
+<ContentLayout
+  title="Pre-Generated Characters"
+  summary="Quick-pick heroes for demos and first sessions, each with a clear fantasy, role, and download link."
+  eyebrow="Demo ready"
+  audience="public"
+>
+  <section class="section content-prose">
+    <p>
+      If you want to join play fast, choose a pre-gen instead of building from scratch. Each one
+      is tuned to show off a different slice of the system and the setting.
+    </p>
+  </section>
+
+  <section class="card-grid">
+    {pregens.map((entry) => (
+      <a class="card" href={`/pregens/${entry.data.slug}/`}>
+        <div class="card__meta">
+          <span>{entry.data.archetype}</span>
+          <span>Level {entry.data.level}</span>
+          <span>{entry.data.complexity}</span>
+        </div>
+        <h3>{entry.data.title}</h3>
+        <p>{entry.data.one_line_pitch}</p>
+        <p class="kicker">{entry.data.world_of_origin}</p>
+      </a>
+    ))}
+  </section>
+</ContentLayout>

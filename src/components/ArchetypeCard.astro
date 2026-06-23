@@ -1,0 +1,22 @@
+---
+type Props = {
+  title: string;
+  summary: string;
+  href: string;
+  primaryStats: string[];
+  complexity: string;
+  combatRole: string;
+};
+
+const { title, summary, href, primaryStats, complexity, combatRole } = Astro.props;
+---
+
+<a class="archetype-card" href={href}>
+  <div class="archetype-card__meta">
+    <span>{complexity}</span>
+    <span>{primaryStats.join(' / ')}</span>
+  </div>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <p class="archetype-card__role">{combatRole}</p>
+</a>
