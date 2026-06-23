@@ -12,8 +12,8 @@ const archetypes = (await getCollection('archetypes')).slice(0, 3);
   summary="A fan-made tabletop RPG of gunslingers, haunted doors, dying worlds, psychic songs, and ka-tets bound by fate."
   eyebrow="Recovered field manual"
   audience="public"
-  ctaPrimary={{ label: 'Start Here', href: '/start-here' }}
-  ctaSecondary={{ label: 'Join a Demo Game', href: '/demo' }}
+  ctaPrimary={{ label: 'Join a Demo Game', href: '/join-a-game' }}
+  ctaSecondary={{ label: 'Start Here', href: '/start-here' }}
 >
   <section class="section content-prose">
     <p class="content-lead">
@@ -26,6 +26,20 @@ const archetypes = (await getCollection('archetypes')).slice(0, 3);
       still matters, and decide whether the Tower, the Beams, and the song beneath reality can
       still be saved.
     </p>
+    <div class="button-row">
+      <a class="button button--ghost" href="/pregens">Pick a Pre-Gen</a>
+      <a class="button button--ghost" href="/downloads/player-quickstart.md">Read the Quickstart</a>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Looking for Players</p>
+    <h2>Ka-Tet is open for demo one-shots and future campaign groups.</h2>
+    <p>
+      New players are welcome. No Dark Tower knowledge required. If you want the tone first and
+      the rules second, this site is built to get you to the table fast.
+    </p>
+    <p><strong>Next demo date:</strong> To be announced.</p>
   </section>
 
   <section class="section">
@@ -52,7 +66,7 @@ const archetypes = (await getCollection('archetypes')).slice(0, 3);
         },
         {
           title: 'Downloads',
-          summary: 'Grab quickstarts, pregens, cheat sheets, and GM packets.',
+          summary: 'Grab quickstarts, pregens, and cheat sheets built for public and player-safe use.',
           href: '/downloads',
           icon: '⬇',
         },
@@ -100,8 +114,8 @@ const archetypes = (await getCollection('archetypes')).slice(0, 3);
       character, skim Ka Points, and sit down for a one-shot without needing deep lore homework.
     </p>
     <div class="button-row">
-      <a class="button button--primary" href="/demo">Try the Demo One-Shot</a>
-      <a class="button button--ghost" href="/join-a-game">Join a Game</a>
+      <a class="button button--primary" href="/join-a-game">Join a Demo Game</a>
+      <a class="button button--ghost" href="/demo">See How the One-Shot Works</a>
     </div>
   </section>
 </ContentLayout>

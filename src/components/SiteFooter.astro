@@ -1,5 +1,12 @@
 ---
 import { mainNav, gmNav } from '../lib/navigation';
+
+type Props = {
+  theme?: 'public' | 'gm';
+};
+
+const { theme = 'public' } = Astro.props;
+const isGm = theme === 'gm';
 ---
 
 <footer class="site-footer">
@@ -20,11 +27,17 @@ import { mainNav, gmNav } from '../lib/navigation';
       </div>
     </div>
     <div>
-      <p class="footer-title">GM</p>
+      <p class="footer-title">{isGm ? 'GM' : 'Need a Quick Start?'}</p>
       <div class="footer-links">
-        {gmNav.map((item) => (
-          <a href={item.href}>{item.label}</a>
-        ))}
+        {isGm ? (
+          gmNav.map((item) => <a href={item.href}>{item.label}</a>)
+        ) : (
+          <>
+            <a href="/downloads/player-quickstart.md">Read the Quickstart</a>
+            <a href="/pregens">Pick a Pre-Gen</a>
+            <a href="/join-a-game">Join the Interest List</a>
+          </>
+        )}
       </div>
     </div>
   </div>

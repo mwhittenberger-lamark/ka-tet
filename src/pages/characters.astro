@@ -1,0 +1,60 @@
+---
+import CardGrid from '../components/CardGrid.astro';
+import ContentLayout from '../layouts/ContentLayout.astro';
+---
+
+<ContentLayout
+  title="Characters"
+  summary="The people of Ka-Tet are not just stat blocks. They are songs, scars, debts, prophecies, and loaded guns."
+  eyebrow="Character hub"
+  audience="public"
+>
+  <section class="section content-prose">
+    <p>
+      Use this section to find playable pre-generated characters, major NPCs, voice guides, and
+      character-building tools.
+    </p>
+  </section>
+
+  <section class="section">
+    <CardGrid
+      cards={[
+        {
+          title: 'Pre-Generated Characters',
+          summary: 'Ready-to-play characters for demo games, one-shots, and new players.',
+          href: '/pregens',
+          audience: 'public',
+        },
+        {
+          title: 'Major NPCs',
+          summary:
+            'Campaign figures such as Johnny Minor, Lady Lux, Kaitlyn Graves, Rook Whitetail, and VY-K0.',
+          audience: 'player',
+          status: 'coming-soon',
+          helperText: 'This section is planned but not yet part of the public source of truth.',
+        },
+        {
+          title: "Johnny's Ka-Tet",
+          summary: 'A focused guide to the core NPCs circling Johnny Minor and the road ahead.',
+          audience: 'player',
+          status: 'coming-soon',
+          helperText: 'This section is planned but not yet part of the public source of truth.',
+        },
+        {
+          title: 'Voice Guides',
+          summary: 'Roleplay notes, signature phrases, and dialogue examples for important characters.',
+          audience: 'player',
+          status: 'coming-soon',
+          helperText: 'This section is planned but not yet part of the public source of truth.',
+        },
+        {
+          title: 'Player Character Tools',
+          summary: 'Character sheets, session zero bonds, ka-tet role prompts, and origin questions.',
+          audience: 'public',
+          status: 'coming-soon',
+          helperText: 'This section is planned but not yet part of the public source of truth.',
+        },
+      ]}
+    />
+  </section>
+</ContentLayout>

@@ -1,4 +1,5 @@
 ---
+import JoinInterestForm from '../components/JoinInterestForm.astro';
 import ContentLayout from '../layouts/ContentLayout.astro';
 ---
 
@@ -12,12 +13,11 @@ import ContentLayout from '../layouts/ContentLayout.astro';
     <div class="section content-prose">
       <p class="section-label">What Happens Next</p>
       <p>
-        This MVP uses a host-ready static form. On platforms such as Netlify, form handling can be
-        turned on without rewriting the page; otherwise the fields still document the exact intake
-        the site was designed for.
+        Use this form to join the interest list for future Ka-Tet demo games and campaigns. Once
+        you send it, the message is forwarded to the site GM and stored in the form service inbox.
       </p>
       <p>
-        Use the notes field to call out schedule limits, favorite archetypes, or what kind of
+        Use the message field to call out schedule limits, favorite archetypes, or what kind of
         horror pacing works best for you.
       </p>
     </div>
@@ -27,64 +27,13 @@ import ContentLayout from '../layouts/ContentLayout.astro';
         Ka-Tet blends grief, dread, violence, and hope. The goal is not cruelty; it is emotionally
         resonant adventure with explicit safety tools and a collaborative table culture.
       </p>
+      <p>
+        If the form misbehaves, email <a class="kicker" href="mailto:mwhittenberger@lamarkmedia.com">mwhittenberger@lamarkmedia.com</a>.
+      </p>
     </div>
   </section>
 
   <section class="section">
-    <form class="form-grid" name="join-game" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="join-game" />
-      <label>
-        Name
-        <input name="name" autocomplete="name" required />
-      </label>
-      <label>
-        Email
-        <input type="email" name="email" autocomplete="email" required />
-      </label>
-      <label>
-        RPG Experience
-        <select name="experience">
-          <option>Brand new</option>
-          <option>Some one-shots</option>
-          <option>Regular player</option>
-          <option>Veteran</option>
-        </select>
-      </label>
-      <label>
-        Interested In
-        <select name="interest">
-          <option>One-shot</option>
-          <option>Campaign</option>
-          <option>Either</option>
-        </select>
-      </label>
-      <label>
-        Availability
-        <input name="availability" placeholder="Weeknights, weekends, monthly, etc." />
-      </label>
-      <label>
-        Preferred Play Style
-        <input name="playstyle" placeholder="Roleplay, tactics, horror, exploration..." />
-      </label>
-      <label>
-        Comfort With Horror
-        <select name="horror-comfort">
-          <option>Light</option>
-          <option>Moderate</option>
-          <option>Heavy, with safety tools</option>
-        </select>
-      </label>
-      <label>
-        Favorite Archetype
-        <input name="archetype" placeholder="Gunslinger, Singer, Walker..." />
-      </label>
-      <label style="grid-column: 1 / -1;">
-        Notes
-        <textarea name="notes" placeholder="Tell us what kind of story or table vibe you want."></textarea>
-      </label>
-      <div class="button-row" style="grid-column: 1 / -1;">
-        <button class="button button--primary" type="submit">Send Interest</button>
-      </div>
-    </form>
+    <JoinInterestForm />
   </section>
 </ContentLayout>

@@ -3,7 +3,9 @@ type Props = {
   text?: string;
 };
 
-const { text = 'GM ONLY — The Red Watches. This page contains campaign spoilers.' } = Astro.props;
+const {
+  text = 'GM ONLY — MAJOR SPOILERS. This page contains hidden campaign information. Players should leave now.',
+} = Astro.props;
 ---
 
 <div class="spoiler-banner">

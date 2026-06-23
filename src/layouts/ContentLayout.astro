@@ -1,5 +1,6 @@
 ---
 import AudienceBadge from '../components/AudienceBadge.astro';
+import GmGate from '../components/GmGate.astro';
 import Hero from '../components/Hero.astro';
 import SpoilerBanner from '../components/SpoilerBanner.astro';
 import BaseLayout from './BaseLayout.astro';
@@ -13,6 +14,8 @@ type Props = {
   theme?: 'public' | 'gm';
   ctaPrimary?: { label: string; href: string };
   ctaSecondary?: { label: string; href: string };
+  robots?: string;
+  gmGate?: boolean;
 };
 
 const {
@@ -24,13 +27,15 @@ const {
   theme = audience === 'gm' ? 'gm' : 'public',
   ctaPrimary,
   ctaSecondary,
+  robots,
+  gmGate = false,
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={summary} theme={theme}>
+<BaseLayout title={title} description={summary} theme={theme} robots={robots}>
   <section class="page-hero">
     <AudienceBadge audience={audience} spoilerLevel={spoilerLevel} />
-    {audience === 'gm' && spoilerLevel === 'major' && <SpoilerBanner />}
+    {gmGate && <SpoilerBanner />}
     <Hero
       title={title}
       subtitle={summary}
@@ -40,6 +45,12 @@ const {
     />
   </section>
   <div class="content-shell">
-    <slot />
+    {gmGate ? (
+      <GmGate>
+        <slot />
+      </GmGate>
+    ) : (
+      <slot />
+    )}
   </div>
 </BaseLayout>

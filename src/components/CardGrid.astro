@@ -2,10 +2,12 @@
 export type Card = {
   title: string;
   summary: string;
-  href: string;
+  href?: string;
   icon?: string;
   audience?: 'public' | 'player' | 'gm';
   spoilerLevel?: 'none' | 'light' | 'major';
+  status?: 'live' | 'coming-soon';
+  helperText?: string;
 };
 
 type Props = {
@@ -16,15 +18,30 @@ const { cards } = Astro.props;
 ---
 
 <div class="card-grid">
-  {cards.map((card) => (
-    <a class="card" href={card.href}>
-      <div class="card__meta">
-        <span>{card.icon ?? '◆'}</span>
-        {card.audience && <span>{card.audience}</span>}
-        {card.spoilerLevel && <span>{card.spoilerLevel}</span>}
-      </div>
-      <h3>{card.title}</h3>
-      <p>{card.summary}</p>
-    </a>
-  ))}
+  {cards.map((card) =>
+    card.href && card.status !== 'coming-soon' ? (
+      <a class="card" href={card.href}>
+        <div class="card__meta">
+          <span>{card.icon ?? '◆'}</span>
+          {card.audience && <span>{card.audience}</span>}
+          {card.spoilerLevel && <span>{card.spoilerLevel}</span>}
+        </div>
+        <h3>{card.title}</h3>
+        <p>{card.summary}</p>
+        {card.helperText && <p class="card__helper">{card.helperText}</p>}
+      </a>
+    ) : (
+      <article class="card card--disabled" aria-disabled="true">
+        <div class="card__meta">
+          <span>{card.icon ?? '◆'}</span>
+          {card.audience && <span>{card.audience}</span>}
+          {card.spoilerLevel && <span>{card.spoilerLevel}</span>}
+          <span>Coming Soon</span>
+        </div>
+        <h3>{card.title}</h3>
+        <p>{card.summary}</p>
+        {card.helperText && <p class="card__helper">{card.helperText}</p>}
+      </article>
+    ),
+  )}
 </div>

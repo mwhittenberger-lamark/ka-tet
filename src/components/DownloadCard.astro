@@ -2,13 +2,14 @@
 type Props = {
   title: string;
   summary: string;
-  filePath: string;
+  filePath?: string;
   fileType: string;
   audience: string;
   spoilerLevel: string;
+  available?: boolean;
 };
 
-const { title, summary, filePath, fileType, audience, spoilerLevel } = Astro.props;
+const { title, summary, filePath, fileType, audience, spoilerLevel, available = true } = Astro.props;
 ---
 
 <article class="download-card">
@@ -19,7 +20,11 @@ const { title, summary, filePath, fileType, audience, spoilerLevel } = Astro.pro
   </div>
   <h3>{title}</h3>
   <p>{summary}</p>
-  <a class="button button--ghost" href={filePath} download>
-    Download
-  </a>
+  {available && filePath ? (
+    <a class="button button--ghost" href={filePath} download>
+      Download
+    </a>
+  ) : (
+    <span class="button button--ghost button--disabled" aria-disabled="true">Coming Soon</span>
+  )}
 </article>

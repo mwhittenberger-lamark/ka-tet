@@ -19,27 +19,35 @@ const path = Astro.url.pathname;
 
     <nav class="desktop-nav" aria-label="Main">
       {mainNav.map((item) => (
-        <a class:list={['nav-link', path === item.href && 'is-active']} href={item.href}>
+        <a
+          class:list={['nav-link', path === item.href && 'is-active']}
+          href={item.href}
+          aria-current={path === item.href ? 'page' : undefined}
+        >
           {item.label}
         </a>
       ))}
     </nav>
 
     <div class="header-actions">
-      <a class:list={['gm-link', path.startsWith('/gm') && 'is-active']} href="/gm">
-        GM
-      </a>
+      {isGm && (
+        <a class="gm-link" href="/">
+          Return to Public Site
+        </a>
+      )}
       <details class="mobile-nav">
         <summary>Menu</summary>
         <div class="mobile-nav__panel">
           {mainNav.map((item) => (
-            <a class:list={['mobile-link', path === item.href && 'is-active']} href={item.href}>
+            <a
+              class:list={['mobile-link', path === item.href && 'is-active']}
+              href={item.href}
+              aria-current={path === item.href ? 'page' : undefined}
+            >
               {item.label}
             </a>
           ))}
-          <a class:list={['mobile-link', path.startsWith('/gm') && 'is-active']} href="/gm">
-            GM Dashboard
-          </a>
+          {isGm && <a class="mobile-link" href="/">Return to Public Site</a>}
         </div>
       </details>
     </div>

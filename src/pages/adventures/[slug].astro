@@ -20,9 +20,9 @@ const isSpoilerHeavy = entry.data.audience === 'gm' || entry.data.spoiler_level 
   title={entry.data.title}
   summary={entry.data.summary_player_safe}
   eyebrow={`${entry.data.act} · Levels ${entry.data.level_range}`}
-  audience={isSpoilerHeavy ? 'gm' : 'public'}
-  spoilerLevel={entry.data.spoiler_level}
-  theme={isSpoilerHeavy ? 'gm' : 'public'}
+  audience="public"
+  spoilerLevel={isSpoilerHeavy ? 'light' : entry.data.spoiler_level}
+  theme="public"
 >
   {isSpoilerHeavy ? (
     <>
@@ -36,10 +36,8 @@ const isSpoilerHeavy = entry.data.audience === 'gm' || entry.data.spoiler_level 
         </p>
         <p>{entry.data.summary_player_safe}</p>
         <p>
-          Full scene structure, secrets, and consequences live in the GM module view at
-          <a class="kicker" href={`/gm/adventures/${entry.data.slug}/`}>
-            /gm/adventures/{entry.data.slug}
-          </a>.
+          Full scene structure, secrets, and consequences live in the GM section behind a spoiler
+          gate.
         </p>
       </section>
     </>

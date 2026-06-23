@@ -1,0 +1,153 @@
+---
+const endpoint = 'https://formsubmit.co/ajax/mwhittenberger@lamarkmedia.com';
+const formUrl = 'https://ka-tet.mike-6d4.workers.dev/join-a-game/';
+---
+
+<form class="form-grid join-form" data-join-form novalidate>
+  <input type="hidden" name="_subject" value="Ka-Tet interest list submission" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_url" value={formUrl} />
+  <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" />
+
+  <label>
+    Name
+    <input name="name" autocomplete="name" required />
+  </label>
+  <label>
+    Email
+    <input type="email" name="email" autocomplete="email" required />
+  </label>
+  <label>
+    RPG Experience
+    <select name="rpg_experience" required>
+      <option value="">Choose one</option>
+      <option>Brand new</option>
+      <option>Some one-shots</option>
+      <option>Regular player</option>
+      <option>Veteran</option>
+    </select>
+  </label>
+  <label>
+    Favorite Character Type
+    <input
+      name="favorite_character_type"
+      placeholder="Gunslinger, Singer, Walker, Protocol Shell..."
+      required
+    />
+  </label>
+  <label>
+    Comfort With Horror
+    <select name="horror_comfort" required>
+      <option value="">Choose one</option>
+      <option>Light</option>
+      <option>Moderate</option>
+      <option>Heavy, with safety tools</option>
+    </select>
+  </label>
+  <label>
+    Availability
+    <input name="availability" placeholder="Weeknights, weekends, monthly, etc." required />
+  </label>
+  <label>
+    Interested In
+    <select name="interest_type" required>
+      <option value="">Choose one</option>
+      <option>Demo one-shot</option>
+      <option>Ongoing campaign</option>
+      <option>Either</option>
+    </select>
+  </label>
+  <label>
+    Preferred Play Style
+    <input name="play_style" placeholder="Roleplay, tactics, horror, exploration..." />
+  </label>
+  <label style="grid-column: 1 / -1;">
+    Message
+    <textarea
+      name="message"
+      placeholder="Tell me what kind of story, pace, and table vibe you want."
+      required
+    ></textarea>
+  </label>
+  <div class="button-row" style="grid-column: 1 / -1;">
+    <button class="button button--primary" type="submit">Join the Interest List</button>
+  </div>
+  <p class="form-status" data-join-status style="grid-column: 1 / -1;" aria-live="polite"></p>
+</form>
+
+<script is:inline define:vars={{ endpoint }}>
+  const form = document.querySelector('[data-join-form]');
+  const status = document.querySelector('[data-join-status]');
+
+  function setStatus(message, type) {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.state = type;
+  }
+
+  function validateEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const currentForm = event.currentTarget;
+    if (!(currentForm instanceof HTMLFormElement)) return;
+
+    if (!currentForm.reportValidity()) {
+      setStatus('Please complete the required fields before sending your message.', 'error');
+      return;
+    }
+
+    const formData = new FormData(currentForm);
+    const email = String(formData.get('email') ?? '');
+
+    if (!validateEmail(email)) {
+      setStatus('Please enter a valid email address before continuing.', 'error');
+      return;
+    }
+
+    const submitButton = currentForm.querySelector('button[type="submit"]');
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Crossing the thinny...';
+    }
+
+    setStatus('Sending your message across the beam...', 'pending');
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
+      const data = await response.json();
+      if (data.success !== 'true' && data.success !== true) {
+        throw new Error('Submission failed');
+      }
+
+      currentForm.reset();
+      setStatus(
+        'Your name has been added to the path. I’ll reach out when the next demo or campaign seat opens.',
+        'success',
+      );
+    } catch (error) {
+      setStatus(
+        'The message did not cross the thinny. Please try again or email me directly.',
+        'error',
+      );
+    } finally {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Join the Interest List';
+      }
+    }
+  });
+</script>

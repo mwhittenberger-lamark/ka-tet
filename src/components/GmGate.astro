@@ -1,0 +1,90 @@
+---
+const storageKey = 'ka-tet-gm-access';
+const passwordHash =
+  'dd615a724feb9f850bc4b6f6dad66d19c39c14cf061005a24eb517c2bbb0fc59';
+---
+
+<section class="gm-gate" data-gm-gate>
+  <div class="section content-prose gm-gate__panel" data-gm-gate-panel>
+    <p class="section-label">GM Access Only</p>
+    <h2>The Red watches this threshold.</h2>
+    <p>
+      The pages beyond this point contain major campaign spoilers for Ka-Tet: The Path of the
+      Beam, including NPC deaths, hidden villains, campaign revelations, and endgame choices.
+    </p>
+    <p>Players should not continue.</p>
+    <form class="gm-gate__form" data-gm-gate-form>
+      <label for="gm-password">Enter GM password</label>
+      <input
+        id="gm-password"
+        name="gm-password"
+        type="password"
+        autocomplete="current-password"
+        required
+      />
+      <div class="button-row">
+        <button class="button button--primary" type="submit">Open the Door</button>
+      </div>
+      <p class="gm-gate__message" data-gm-gate-message aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<div data-gm-content hidden>
+  <slot />
+</div>
+
+<noscript>
+  <section class="section content-prose">
+    <p class="section-label">JavaScript Required</p>
+    <p>This spoiler gate needs JavaScript enabled before GM-only content can be revealed.</p>
+  </section>
+</noscript>
+
+<script is:inline define:vars={{ storageKey, passwordHash }}>
+  const gate = document.querySelector('[data-gm-gate]');
+  const panel = document.querySelector('[data-gm-gate-panel]');
+  const form = document.querySelector('[data-gm-gate-form]');
+  const message = document.querySelector('[data-gm-gate-message]');
+  const content = document.querySelector('[data-gm-content]');
+
+  async function digest(value) {
+    const data = new TextEncoder().encode(value);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  function reveal() {
+    if (gate) gate.hidden = true;
+    if (content) content.hidden = false;
+  }
+
+  if (sessionStorage.getItem(storageKey) === 'open') {
+    reveal();
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const password = String(formData.get('gm-password') ?? '');
+    const hash = await digest(password);
+
+    if (hash === passwordHash) {
+      sessionStorage.setItem(storageKey, 'open');
+      if (message) {
+        message.textContent = 'The thinny parts. Welcome, sai.';
+      }
+      if (panel) {
+        panel.classList.add('is-success');
+      }
+      window.setTimeout(reveal, 250);
+      return;
+    }
+
+    if (message) {
+      message.textContent = 'The door does not open.';
+    }
+  });
+</script>

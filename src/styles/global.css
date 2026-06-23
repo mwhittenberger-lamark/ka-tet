@@ -141,6 +141,7 @@ img {
 .nav-link.is-active,
 .gm-link.is-active,
 .mobile-link.is-active,
+[aria-current='page'],
 .nav-link:hover,
 .gm-link:hover,
 .mobile-link:hover {
@@ -285,6 +286,11 @@ img {
   background: rgba(255, 255, 255, 0.35);
 }
 
+.button--disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
 .site-shell--gm .button--ghost {
   border-color: var(--gm-line);
   background: rgba(255, 255, 255, 0.04);
@@ -391,6 +397,17 @@ img {
   border-color: rgba(143, 47, 31, 0.4);
 }
 
+.card--disabled,
+.card--disabled:hover {
+  transform: none;
+  border-style: dashed;
+  opacity: 0.84;
+}
+
+.card__helper {
+  font-size: 0.94rem;
+}
+
 .card h3,
 .archetype-card h3,
 .download-card h3,
@@ -472,6 +489,21 @@ td {
   margin-top: 1rem;
 }
 
+.gm-gate__panel {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.gm-gate__form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.gm-gate__message {
+  min-height: 1.5rem;
+  font-family: var(--font-ui);
+}
+
 .stat-list,
 .tag-list,
 .check-list {
@@ -530,6 +562,18 @@ td {
   gap: 1rem;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .form-grid label,
 .section label {
   display: grid;
@@ -559,6 +603,23 @@ textarea {
 textarea {
   min-height: 160px;
   resize: vertical;
+}
+
+.form-status {
+  min-height: 1.5rem;
+  font-family: var(--font-ui);
+}
+
+.form-status[data-state='success'] {
+  color: #275c2c;
+}
+
+.form-status[data-state='error'] {
+  color: #8f2f1f;
+}
+
+.form-status[data-state='pending'] {
+  color: var(--muted);
 }
 
 .image-card {

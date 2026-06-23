@@ -1,0 +1,60 @@
+---
+import CardGrid from '../../../components/CardGrid.astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+---
+
+<ContentLayout
+  title="GM NPC Secrets"
+  summary="GM-only index of major NPC truths, hidden agendas, deaths, betrayals, and campaign revelations."
+  eyebrow="GM NPC index"
+  audience="gm"
+  spoilerLevel="major"
+  theme="gm"
+  robots="noindex,nofollow"
+  gmGate={true}
+>
+  <section class="section content-prose">
+    <p class="section-label">Major NPCs</p>
+    <ul>
+      <li>Johnny Minor</li>
+      <li>Lady Lux</li>
+      <li>Kaitlyn “Red-Eye” Graves</li>
+      <li>Rook Whitetail</li>
+      <li>VY-K0</li>
+      <li>Dusty</li>
+      <li>Jah’kaan Minor</li>
+      <li>Yoko</li>
+      <li>Marietta</li>
+      <li>Pete Best</li>
+    </ul>
+    <p>These pages contain spoilers and should not be shown to players.</p>
+  </section>
+
+  <section class="section">
+    <CardGrid
+      cards={[
+        {
+          title: 'Johnny Minor',
+          summary: 'Public prophet, hidden fracture, and the shape of the whole campaign.',
+          href: '/gm/npcs/johnny-minor/',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+        {
+          title: 'Kaitlyn “Red-Eye” Graves',
+          summary: 'Protector, rebellion seed, and one of the campaign’s sharpest moral edges.',
+          href: '/gm/npcs/kaitlyn-red-eye-graves/',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+        {
+          title: 'Lady Lux',
+          summary: 'Grace, music, and the consequences of harmony breaking.',
+          href: '/gm/npcs/lady-lux/',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+      ]}
+    />
+  </section>
+</ContentLayout>

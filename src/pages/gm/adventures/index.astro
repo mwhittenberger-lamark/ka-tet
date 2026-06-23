@@ -1,0 +1,57 @@
+---
+import CardGrid from '../../../components/CardGrid.astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+---
+
+<ContentLayout
+  title="GM Adventure Library"
+  summary="GM-only index of campaign modules, one-shots, and session-ready adventures."
+  eyebrow="GM library"
+  audience="gm"
+  spoilerLevel="major"
+  theme="gm"
+  robots="noindex,nofollow"
+  gmGate={true}
+>
+  <section class="section content-prose">
+    <p class="section-label">Current Adventures</p>
+    <ul>
+      <li>Rose Creek: The Way of Dust and Fire</li>
+      <li>Save Lee Harvey Oswald</li>
+      <li>Cult Rescue / Yoko</li>
+      <li>Storm Area 51</li>
+      <li>Todash Game</li>
+      <li>Blair Witch Forest</li>
+      <li>Smoky Mountain Mine</li>
+    </ul>
+    <p>More detailed module pages are coming.</p>
+  </section>
+
+  <section class="section">
+    <CardGrid
+      cards={[
+        {
+          title: 'Rose Creek: The Way of Dust and Fire',
+          summary: 'Beam-touched western play with the campaign’s emotional high point.',
+          href: '/gm/adventures/rose-creek-way-of-dust-and-fire/',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+        {
+          title: 'Todash Game',
+          summary: 'Psychological horror trial built to turn the party inward.',
+          href: '/gm/adventures/todash-game/',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+        {
+          title: 'Save Yoko: Psychic Prison',
+          summary: 'Mindscape tragedy, memory horror, and a rescue that can’t stay clean.',
+          href: '/gm/adventures/save-yoko-psychic-prison/',
+          audience: 'gm',
+          spoilerLevel: 'major',
+        },
+      ]}
+    />
+  </section>
+</ContentLayout>

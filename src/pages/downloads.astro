@@ -4,20 +4,28 @@ import DownloadCard from '../components/DownloadCard.astro';
 import ContentLayout from '../layouts/ContentLayout.astro';
 
 const downloads = await getCollection('downloads');
-const categories = [...new Set(downloads.map((entry) => entry.data.category))];
+const publicDownloads = downloads.filter((entry) => entry.data.audience !== 'gm');
+const categories = [...new Set(publicDownloads.map((entry) => entry.data.category))];
 ---
 
 <ContentLayout
   title="Downloads"
-  summary="Quickstarts, character tools, cheat sheets, and GM packets collected in one place."
+  summary="Quickstarts, character tools, and table-ready cheat sheets collected in one place."
   eyebrow="Download library"
   audience="public"
 >
+  <section class="section content-prose">
+    <p>
+      Everything linked on this page is public or player-safe. GM packets and spoiler-heavy tools
+      live behind the GM gate.
+    </p>
+  </section>
+
   {categories.map((category) => (
     <section class="section">
       <p class="section-label">{category}</p>
       <div class="card-grid">
-        {downloads
+        {publicDownloads
           .filter((entry) => entry.data.category === category)
           .map((entry) => (
             <DownloadCard
@@ -27,6 +35,7 @@ const categories = [...new Set(downloads.map((entry) => entry.data.category))];
               fileType={entry.data.file_type}
               audience={entry.data.audience}
               spoilerLevel={entry.data.spoiler_level}
+              available={Boolean(entry.data.file_path)}
             />
           ))}
       </div>
