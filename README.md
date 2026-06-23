@@ -34,3 +34,4 @@ Collection schemas and loaders live in [src/content.config.ts](/Users/mwhittenbe
 - The visual direction follows the planning docs in the project root.
 - Download assets in `public/downloads/` are MVP placeholders and can be replaced with PDFs later.
 - GM pages are spoiler-marked but not authenticated yet.
+- Production updates are expected to deploy from the `main` branch.
