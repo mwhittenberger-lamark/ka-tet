@@ -9,7 +9,7 @@ const categories = [...new Set(rules.map((entry) => entry.data.category))];
 
 <ContentLayout
   title="Rules Overview"
-  summary="Core resolution, signature mechanics, combat, horror, and travel reference pages built for table use."
+  summary="Core resolution, signature mechanics, combat, powers, horror, and travel reference pages built for table use."
   eyebrow="Rules reference"
   audience="player"
 >
@@ -17,8 +17,33 @@ const categories = [...new Set(rules.map((entry) => entry.data.category))];
     <p class="section-label">Most Used Rules</p>
     <p>
       For most sessions, you will bounce between Core Rolls, Ka Points, Combat, Firearms, Fear and
-      Madness, and Travel. Everything else is supporting structure.
+      Madness, and Travel. Everything else supports those scenes.
     </p>
+    <p>
+      If you only have five minutes before play, read <strong>Ka Points</strong>,{' '}
+      <strong>Combat</strong>, and <strong>Firearms</strong>. If your character uses songs,
+      psychic powers, or Old Ones relics, add <strong>Spellcasting and Powers</strong> before you
+      sit down.
+    </p>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">How To Use This Section</p>
+      <ul>
+        <li>Read the quick reference first.</li>
+        <li>Use the main body to understand tone and edge cases.</li>
+        <li>Check the examples when you want to know how the rule feels in play.</li>
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Signature Assumptions</p>
+      <ul>
+        <li>Failure should move the fiction, not just stop it.</li>
+        <li>Cover, ammo, fear, and scarcity are part of the system’s pressure.</li>
+        <li>The strange parts of the world should stay legible to players without losing mystery.</li>
+      </ul>
+    </div>
   </section>
 
   {categories.map((category) => (

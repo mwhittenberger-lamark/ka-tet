@@ -639,6 +639,92 @@ textarea {
   font-size: 1.4rem;
 }
 
+.home-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-panel::after {
+  content: '';
+  position: absolute;
+  inset: auto -10% -25% 45%;
+  height: 220px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(143, 47, 31, 0.16), transparent 58%);
+  pointer-events: none;
+}
+
+.home-stat-grid,
+.home-steps {
+  display: grid;
+  gap: 1rem;
+}
+
+.home-stat-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-stat-grid article,
+.home-steps article {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.home-stat-grid strong,
+.home-steps span,
+.home-steps h3 {
+  font-family: var(--font-display);
+}
+
+.home-stat-grid strong {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.home-stat-grid p,
+.home-note,
+.home-steps p,
+.home-steps a {
+  color: var(--muted);
+}
+
+.home-note {
+  margin: 0;
+  font-style: italic;
+}
+
+.home-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-steps article {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.home-steps span {
+  font-size: 2rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.home-steps a {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.home-steps a:hover {
+  color: var(--accent);
+}
+
 @media (max-width: 980px) {
   .hero,
   .split,
@@ -660,6 +746,11 @@ textarea {
 
   .mobile-nav {
     display: block;
+  }
+
+  .home-stat-grid,
+  .home-steps {
+    grid-template-columns: 1fr;
   }
 }
 

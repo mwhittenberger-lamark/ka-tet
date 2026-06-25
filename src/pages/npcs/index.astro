@@ -4,6 +4,10 @@ import CardGrid from '../../components/CardGrid.astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 
 const npcs = await getCollection('npcs');
+const featuredSlugs = ['johnny-minor', 'kaitlyn-red-eye-graves', 'lady-lux', 'vy-k0'];
+const featuredNpcs = featuredSlugs
+  .map((slug) => npcs.find((entry) => entry.data.slug === slug))
+  .filter(Boolean);
 ---
 
 <ContentLayout
@@ -13,14 +17,45 @@ const npcs = await getCollection('npcs');
   audience="player"
   spoilerLevel="light"
 >
-  <section class="section content-prose">
-    <p>
-      NPC pages emphasize voice, role, and emotional function at the table. Secret agendas,
-      betrayals, and endgame truths stay on the GM side.
-    </p>
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">How To Use This</p>
+      <p>
+        These pages are meant to help players remember who matters, what they sound like, and why
+        they leave a mark on the story. Secret agendas, betrayals, and endgame truths stay on the
+        GM side.
+      </p>
+      <p>
+        If someone shows up here, they are important enough that your character is likely to keep
+        hearing their name after the scene ends.
+      </p>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">What Stays Off-Page</p>
+      <ul>
+        <li>Hidden motivations and unrevealed loyalties</li>
+        <li>Late-campaign twists and endgame identities</li>
+        <li>GM-only stat detail or encounter logic</li>
+        <li>Anything that would turn a relationship summary into a spoiler</li>
+      </ul>
+    </div>
   </section>
 
   <section class="section">
+    <p class="section-label">Start With These Faces</p>
+    <CardGrid
+      cards={featuredNpcs.map((entry) => ({
+        title: entry.data.title,
+        summary: entry.data.public_summary,
+        href: `/npcs/${entry.data.slug}/`,
+        audience: 'player' as const,
+        spoilerLevel: entry.data.spoiler_level,
+      }))}
+    />
+  </section>
+
+  <section class="section">
+    <p class="section-label">Full Roster</p>
     <CardGrid
       cards={npcs.map((entry) => ({
         title: entry.data.title,

@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import CardGrid from '../../components/CardGrid.astro';
 import QuoteCallout from '../../components/QuoteCallout.astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 
@@ -13,6 +14,10 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const npcs = await getCollection('npcs');
+const relatedNpcs = npcs.filter((npc) =>
+  entry.data.relationships.some((relationship) => relationship.player_safe && relationship.slug === npc.data.slug),
+);
 ---
 
 <ContentLayout
@@ -37,6 +42,13 @@ const { Content } = await render(entry);
         <li><strong>Alignment:</strong> {entry.data.alignment}</li>
         <li><strong>Archetype:</strong> {entry.data.archetype}</li>
       </ul>
+      <div class="stat-list">
+        <span>First Appearance: {entry.data.first_appearance}</span>
+        <span>Level: {entry.data.level}</span>
+        {entry.data.tags.map((tag) => (
+          <span>{tag}</span>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -63,6 +75,27 @@ const { Content } = await render(entry);
 
   <QuoteCallout quote={entry.data.quotes.calm[0]} attribution={entry.data.title} variant="normal" />
 
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Why They Matter</p>
+      <p>{entry.data.campaign_arc}</p>
+      <h3>Public Pressure</h3>
+      <p>
+        This character should feel important at the table because of what they ask from the
+        ka-tet emotionally, not just because they can move the plot.
+      </p>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Memorable Lines</p>
+      <ul>
+        <li><strong>Angry:</strong> {entry.data.quotes.angry[0]}</li>
+        <li><strong>Sarcastic:</strong> {entry.data.quotes.sarcastic[0]}</li>
+        <li><strong>Vulnerable:</strong> {entry.data.quotes.vulnerable[0]}</li>
+        <li><strong>Prophetic:</strong> {entry.data.quotes.prophetic[0]}</li>
+      </ul>
+    </div>
+  </section>
+
   <section class="section content-prose">
     <p class="section-label">Known Relationships</p>
     {entry.data.relationships.length > 0 ? (
@@ -76,9 +109,22 @@ const { Content } = await render(entry);
     ) : (
       <p>No public relationship notes yet.</p>
     )}
-    <h3>Campaign Role</h3>
-    <p>{entry.data.campaign_arc}</p>
   </section>
+
+  {relatedNpcs.length > 0 && (
+    <section class="section">
+      <p class="section-label">Related Faces</p>
+      <CardGrid
+        cards={relatedNpcs.map((npc) => ({
+          title: npc.data.title,
+          summary: npc.data.public_summary,
+          href: `/npcs/${npc.data.slug}/`,
+          audience: 'player' as const,
+          spoilerLevel: npc.data.spoiler_level,
+        }))}
+      />
+    </section>
+  )}
 
   <article class="section content-prose">
     <Content />

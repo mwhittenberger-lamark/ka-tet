@@ -35,11 +35,39 @@ subclasses:
   - name: "Path of Eld"
     summary: "The traditional honorable gunslinger."
     theme: "Duty, precision, the old code."
-    features: []
+    features:
+      - name: "Bond of Ka-Tet"
+        level: 3
+        summary: "Fight like the tet's fate is braided to your own."
+        rules_text: "Use your reaction to defend bonded allies, boost their saves, and make leadership feel like a supernatural extension of the old creed."
+      - name: "Eld's Rally"
+        level: 7
+        summary: "Turn courage into battlefield momentum."
+        rules_text: "Call allies to move, steady themselves, and take heart when the line should already have broken."
   - name: "Path of the Fallen"
     summary: "A broken gunslinger fighting through shame, loss, and fury."
     theme: "Redemption, ghosts, venomous skill."
-    features: []
+    features:
+      - name: "Grim Tempo"
+        level: 3
+        summary: "Pain teaches you to keep shooting when a better soul would stop."
+        rules_text: "Lean into ruthless tempo, brutal follow-through, and the frightening efficiency of someone who already lost too much."
+      - name: "Shadow Mark"
+        level: 14
+        summary: "Single out one enemy and make them regret being seen."
+        rules_text: "Mark a target for punishing damage and deny them clean retaliation while your focus locks in."
+  - name: "Path of the Eldritch Bullet"
+    summary: "A rare gunslinger who binds strange force to crafted lead."
+    theme: "Beam magic, arcane marksmanship, impossible rounds."
+    features:
+      - name: "Arcane Marksman"
+        level: 3
+        summary: "Etch power into bullets and let the shot carry more than metal."
+        rules_text: "Blend cantrip-tier magic and specialized rounds into firearm attacks that feel like artifacts rather than ammunition."
+      - name: "Runed Chamber"
+        level: 7
+        summary: "Prepare shots for silence, force, or disruption."
+        rules_text: "Build strange ammunition that helps you challenge cover, wards, or creatures that normal lead should not stop."
 starting_equipment:
   - "Revolver or paired revolvers"
   - "Duster or travel coat"
@@ -67,3 +95,7 @@ Gunslingers are the quickest answer to chaos. They are not just marksmen, but sy
 ## Why players choose this path
 
 If you want a class that feels iconic the moment it enters a room, the Gunslinger is the cleanest fit. You carry danger openly and still have to decide what kind of legend you become.
+
+## Story pressure
+
+The best Gunslinger scenes are never only about aim. They are about judgment, memory, command presence, and the fear that your hand may still be steadier than your heart.

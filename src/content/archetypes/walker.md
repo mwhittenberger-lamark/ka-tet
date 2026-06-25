@@ -34,15 +34,39 @@ subclasses:
   - name: "Wayfarer"
     summary: "A practical door-opener and route-finder."
     theme: "Travel, shortcuts, survival."
-    features: []
+    features:
+      - name: "Gatekeeper's Mark"
+        level: 3
+        summary: "Set a beacon and make the road answer to your memory."
+        rules_text: "Mark a place, then pull yourself and allies back to it when the scene turns against you."
+      - name: "Spatial Link"
+        level: 3
+        summary: "Teleport someone else as cleanly as you move yourself."
+        rules_text: "Use your door-sense to reposition willing allies and make the whole tet move smarter."
   - name: "Ghoststepper"
     summary: "A stealthy Walker who moves between heartbeats."
     theme: "Shadow, ambush, phasing."
-    features: []
+    features:
+      - name: "Veil Step"
+        level: 3
+        summary: "Disappear inside your own movement."
+        rules_text: "Turn a phase-step into brief invisibility and slip through occupied space like you were never fully solid."
+      - name: "Dimensional Ambush"
+        level: 7
+        summary: "Hit hardest right after the world loses track of you."
+        rules_text: "Exploit invisibility or recent teleportation to spike damage or wreck the target's next save."
   - name: "Chronoshifter"
     summary: "A Walker touched by time drift."
     theme: "Time, loops, delay, acceleration."
-    features: []
+    features:
+      - name: "Temporal Drift"
+        level: 3
+        summary: "Refuse one bad outcome by stepping a second sideways in time."
+        rules_text: "Reroll failed checks or attacks by letting another nearby version of the moment take the first mistake instead."
+      - name: "Suspend Fate"
+        level: 7
+        summary: "Delay the meaning of a roll until everyone has to fear it."
+        rules_text: "Postpone an attack, save, or damage result for a round and let uncertainty become its own pressure."
 starting_equipment:
   - "Compass or door token"
   - "Travel cloak"
@@ -69,3 +93,7 @@ Walkers are the class for players who want to treat the map like an argument ins
 ## What makes the class sing
 
 The Walker shines when the group is cornered, lost, or crossing worlds. If a campaign leans on doors, pursuit, strange geography, or time wounds, you will feel essential.
+
+## Story pressure
+
+Walkers work best when the map is unstable. Doors, pursuit, false horizons, and reality seams should all feel a little more personal when you are the one who notices them first.

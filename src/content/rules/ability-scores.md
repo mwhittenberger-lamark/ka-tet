@@ -18,4 +18,25 @@ related_rules: ["core-rolls", "proficiency", "character-creation"]
 tags: ["stats", "character"]
 ---
 
-The ability scores describe how a character meets a world that is both hostile and mythic. Use them to support tone, not to flatten roleplay into numbers.
+The six ability scores are familiar if you have played other d20 games, but the book frames them through Mid-World pressure. They describe how your character survives a harsh road, reads strange signs, and keeps going when the world has already moved on.
+
+Characters usually generate scores by rolling `4d6` and dropping the lowest die for each stat, or by using a standard array or point-buy if the group wants tighter balance. Most archetypes care strongly about two core abilities and can live with one or two weak spots.
+
+## What each score means here
+
+- **Strength** covers brute force, climbing, grappling, kicking open doors, and melee damage.
+- **Dexterity** covers gun aim, balance, stealth, initiative, sleight of hand, and fast reactions.
+- **Constitution** covers Grit, endurance, poison, disease, fatigue, and surviving harsh travel.
+- **Intelligence** covers knowledge, reasoning, investigation, riddles, Old Ones technology, and repair work.
+- **Wisdom** covers perception, survival, insight, intuition, resisting fear, and sensing something wrong on the road.
+- **Charisma** covers leadership, persuasion, deception, performance, prophecy, and the force of your soul.
+
+## Common archetype pairings
+
+- **Gunslingers** usually lean on Dexterity and Wisdom.
+- **Walkers** often want Wisdom, Constitution, and enough Dexterity to stay mobile.
+- **Singers** favor Charisma and Wisdom.
+- **Touch-Bearers** often care about Wisdom first and Charisma second.
+- **Tech-Knights** usually build around Intelligence and Dexterity.
+
+Your numbers matter, but they should reinforce the person you imagined. A hard-bitten traveler with low Charisma is different from a born dinh who can still calm a room after the first shot lands.

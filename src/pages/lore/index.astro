@@ -9,16 +9,42 @@ const categories = [...new Set(lore.map((entry) => entry.data.category))];
 
 <ContentLayout
   title="Lore"
-  summary="A player-safe encyclopedia for cosmology, places, factions, and the world-rules vocabulary that shapes play."
+  summary="A player-safe encyclopedia for cosmology, places, factions, and the setting vocabulary that shapes play."
   eyebrow="Encyclopedia"
   audience="public"
 >
   <section class="section content-prose">
     <p>
-      The lore section explains what players need without assuming deep familiarity. Start with
-      cosmology if you want the big picture, or jump to places and factions if you want grounded
-      context for scenes and character choices.
+      The lore section explains what players need without assuming deep familiarity with{' '}
+      <em>The Dark Tower</em>. Start with cosmology if you want the big picture, or jump to places
+      and factions if you want grounded context for scenes and character choices.
     </p>
+    <p>
+      The three ideas that matter most are simple: the <strong>Dark Tower</strong> holds reality
+      together, the <strong>Beams</strong> keep it standing, and <strong>ka</strong> keeps putting
+      people on roads they did not expect to walk.
+    </p>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Good First Reads</p>
+      <ul>
+        <li>The Dark Tower</li>
+        <li>The Beams</li>
+        <li>Ka</li>
+        <li>Mid-World</li>
+        <li>Gunslingers</li>
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">What Lore Is For</p>
+      <ul>
+        <li>Give players a shared vocabulary for strange scenes</li>
+        <li>Support character concepts without requiring homework</li>
+        <li>Explain the world clearly while leaving room for mystery</li>
+      </ul>
+    </div>
   </section>
 
   {categories.map((category) => (

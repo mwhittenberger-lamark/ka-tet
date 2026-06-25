@@ -1,102 +1,494 @@
 ---
+import CardGrid from '../../components/CardGrid.astro';
+import RuleCallout from '../../components/RuleCallout.astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 ---
 
 <ContentLayout
   title="Character Creation"
-  summary="Build a Ka-Tet character in six clear steps, then tie them to the party and the road ahead."
+  summary="Build a wanderer from any world, bind them to a ka-tet, and set them on the Path of the Beam."
   eyebrow="Player creation"
   audience="player"
+  ctaPrimary={{ label: 'View Archetypes', href: '/player-guide/archetypes' }}
+  ctaSecondary={{ label: 'Download Character Sheet', href: '/downloads/character-sheet.md' }}
 >
   <section class="section content-prose">
-    <p class="section-label">Six-Step Summary</p>
-    <ol>
-      <li>Choose a concept and world of origin.</li>
-      <li>Pick an archetype that matches your play style.</li>
-      <li>Assign ability scores to show strengths and weaknesses.</li>
-      <li>Choose background, gear, and a first personal scar.</li>
-      <li>Set derived stats, starting moves, and Ka.</li>
-      <li>Write one bond to another member of the ka-tet.</li>
-    </ol>
+    <p class="content-lead">
+      This page is the player-facing source of truth for creating a Ka-Tet character. It should
+      help a new player make a usable character without needing to understand the entire rulebook
+      first.
+    </p>
   </section>
 
-  <section class="two-column">
-    <div class="section content-prose">
-      <p class="section-label">Ability Scores</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Score</th>
-            <th>Use It For</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Strength</td><td>Force, endurance, brutal leverage</td></tr>
-          <tr><td>Dexterity</td><td>Aim, reflex, stealth, balance</td></tr>
-          <tr><td>Constitution</td><td>Survival, resilience, punishment</td></tr>
-          <tr><td>Intelligence</td><td>Recall, analysis, relic logic</td></tr>
-          <tr><td>Wisdom</td><td>Perception, instinct, reading the wrongness</td></tr>
-          <tr><td>Charisma</td><td>Presence, command, song, conviction</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <RuleCallout
+    title="Quick Summary"
+    points={[
+      'Choose your character concept and world of origin.',
+      'Choose your archetype.',
+      'Assign your ability scores.',
+      'Choose your background, ethos, gear, and personal scar.',
+      'Calculate your derived stats.',
+      'Choose your starting features, powers, and equipment.',
+      'Write your ka-tet bond.',
+      'Finish your backstory and review the character with the GM.',
+    ]}
+  />
 
+  <section class="split">
     <div class="section content-prose">
       <p class="section-label">Starting Level Guidance</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Mode</th>
-            <th>Recommended Level</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Intro Demo</td><td>3</td></tr>
-          <tr><td>Campaign Opening</td><td>1-3</td></tr>
-          <tr><td>Experienced Table</td><td>4-5</td></tr>
-        </tbody>
-      </table>
       <p>
-        For the MVP site, level 3 is the sweet spot: enough signature identity to feel cool, not
-        so much complexity that new players bog down.
+        Most new campaigns should start at <strong>Level 1</strong> or <strong>Level 3</strong>.
+        For demos, convention games, and shop-table one-shots, <strong>Level 3 is recommended</strong>{' '}
+        because characters have enough identity to feel distinct without becoming difficult to run.
       </p>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Core Reminder</p>
+      <ul>
+        <li>Start with the person, not the numbers.</li>
+        <li>Every character needs a scar.</li>
+        <li>The party is a ka-tet, not a stack of solo heroes.</li>
+      </ul>
     </div>
   </section>
 
   <section class="section content-prose">
-    <p class="section-label">Background Examples</p>
+    <p class="section-label">What You Need On Your Sheet</p>
     <table>
       <thead>
         <tr>
-          <th>Background</th>
-          <th>What It Suggests</th>
+          <th>Character Sheet Field</th>
+          <th>What It Means</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Road Medic</td><td>Healing under pressure, triage, grim calm</td></tr>
-        <tr><td>Choir Runaway</td><td>Faith, music, fear of authority</td></tr>
-        <tr><td>Ruin Courier</td><td>Maps, doors, smuggling, bad instincts turned useful</td></tr>
-        <tr><td>Failed Knight</td><td>Old vows, armor, unresolved duty</td></tr>
+        <tr><td>Character Name</td><td>Your name, nickname, alias, or title.</td></tr>
+        <tr><td>Player Name</td><td>The player running the character.</td></tr>
+        <tr><td>Level</td><td>Your current character level.</td></tr>
+        <tr><td>Archetype</td><td>Your class and core role in the story.</td></tr>
+        <tr><td>Subclass / Path</td><td>Your specialization, usually chosen at Level 3.</td></tr>
+        <tr><td>World of Origin</td><td>The world, time, and reality your character came from.</td></tr>
+        <tr><td>Background</td><td>Who you were before ka pulled you onto the road.</td></tr>
+        <tr><td>Ethos</td><td>Your moral compass: White, Gray, or Red.</td></tr>
+        <tr><td>Ability Scores</td><td>Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma.</td></tr>
+        <tr><td>Grit / HP</td><td>Your ability to endure harm, exhaustion, and violence.</td></tr>
+        <tr><td>Armor Class</td><td>How hard you are to hit in combat.</td></tr>
+        <tr><td>Proficiency Bonus</td><td>Your level-based training bonus.</td></tr>
+        <tr><td>Saving Throws / Skills</td><td>What you are trained to resist and do well.</td></tr>
+        <tr><td>Attacks / Powers</td><td>Weapons, attacks, spells, songs, or tech abilities.</td></tr>
+        <tr><td>Equipment</td><td>Weapons, armor, relics, supplies, tools, and keepsakes.</td></tr>
+        <tr><td>Ka Points</td><td>Your pool of fate, luck, and narrative force.</td></tr>
+        <tr><td>Personal Scar</td><td>The wound that follows you into the story.</td></tr>
+        <tr><td>Ka-Tet Bond</td><td>Your connection to another PC and why ka bound you together.</td></tr>
+        <tr><td>Backstory</td><td>A short summary of who you were before the campaign began.</td></tr>
       </tbody>
     </table>
   </section>
 
+  <section class="section content-prose">
+    <p class="section-label">Step 1: Choose A Character Concept</p>
+    <p>Ask yourself:</p>
+    <ul>
+      <li>Who were you before the Tower called?</li>
+      <li>What world, age, or reality did you come from?</li>
+      <li>What did ka take from you?</li>
+      <li>What do you still want?</li>
+      <li>Why would you risk your life for strangers?</li>
+      <li>What part of you is already broken?</li>
+      <li>What part of you refuses to die?</li>
+    </ul>
+    <p>
+      Characters in Ka-Tet can come from almost anywhere. The Dark Tower touches all worlds, and
+      ka gathers people from many wheres and whens.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Origin</th>
+          <th>Character Possibilities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Mid-World</td><td>Fallen gunslinger, Calla farmer, Manni pilgrim, harrier deserter, or Lud scavenger.</td></tr>
+        <tr><td>Keystone Earth</td><td>Runaway, detective, musician, soldier, addict, teacher, preacher, hacker, or ordinary person with impossible dreams.</td></tr>
+        <tr><td>Old Gilead</td><td>Failed apprentice, exiled knight, battlefield survivor, or gunslinger-in-training.</td></tr>
+        <tr><td>Thunderclap</td><td>Breaker escapee, psychic prisoner, Low Man defector, or machine-haunted survivor.</td></tr>
+        <tr><td>Lud</td><td>Tunnel orphan, tech scavenger, Grays deserter, or half-mad machine prophet.</td></tr>
+        <tr><td>Future Earth</td><td>Cyberpunk assassin, AI technician, wasteland medic, drone pilot, or corporate fugitive.</td></tr>
+        <tr><td>Ancient Earth</td><td>Monk, prophet, soldier, witch, Viking, gladiator, or court singer touched by the Beam.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Concept formula:</strong></p>
+    <p>
+      <em>
+        I am a [background] from [world/time] who was [wounded, changed, exiled, chosen, hunted,
+        or saved] by [event]. Now I follow the Beam because [reason], but I fear [truth].
+      </em>
+    </p>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Step 2: Choose An Archetype</p>
+    <p>
+      Your archetype is your class. It defines your core role, combat style, special abilities,
+      hit die, primary stats, saving throws, and starting features.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Archetype</th>
+          <th>Core Fantasy</th>
+          <th>Best For</th>
+          <th>Common Primary Stats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Gunslinger</td><td>Knight-errant with revolvers and a brutal code</td><td>Duel, protect the tet, lead under pressure</td><td>Dexterity, Wisdom</td></tr>
+        <tr><td>Walker</td><td>Traveler between doors, thinnies, and worlds</td><td>Teleport, scout, manipulate space</td><td>Dexterity, Wisdom, Intelligence</td></tr>
+        <tr><td>Singer</td><td>Voice of the Beam through song and resonance</td><td>Support, heal, calm horror, shape emotion</td><td>Charisma, Wisdom</td></tr>
+        <tr><td>Tech-Knight</td><td>Old Ones tech scavenger and engineer</td><td>Use gadgets, repair systems, wear tech armor</td><td>Intelligence, Dexterity</td></tr>
+        <tr><td>Demon-Blooded</td><td>Human soul carrying Prim-born or demonic power</td><td>Fight with corruption and dark force</td><td>Charisma, Constitution</td></tr>
+        <tr><td>Touch-Bearer</td><td>Psychic, empath, seer, or dream-touched wanderer</td><td>Read danger, glimpse fate, protect through intuition</td><td>Wisdom, Charisma</td></tr>
+        <tr><td>Hemophage</td><td>Blood-hungry predator or cursed survivor</td><td>Feed, stalk, regenerate, struggle with hunger</td><td>Dexterity, Constitution</td></tr>
+        <tr><td>Protocol Shell</td><td>Construct or android with a soul-shaped glitch</td><td>Play a machine becoming more than code</td><td>Intelligence, Dexterity</td></tr>
+        <tr><td>Tongue of Discord</td><td>Manipulator, false prophet, coercive speaker</td><td>Bend truth, deceive, command, terrify</td><td>Charisma, Intelligence</td></tr>
+        <tr><td>Shard-Bound</td><td>Fractured soul with multiple selves</td><td>Shift personas and survive identity horror</td><td>Wisdom, Charisma, Constitution</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Most archetypes choose a subclass, path, discipline, or resonance at <strong>Level 3</strong>.
+      If your campaign starts at Level 3, choose it during character creation.
+    </p>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Step 3: Assign Ability Scores</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Ability</th>
+          <th>What It Measures</th>
+          <th>Common Uses</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Strength</td><td>Physical power and brutal leverage</td><td>Melee attacks, climbing, forcing doors, grappling</td></tr>
+        <tr><td>Dexterity</td><td>Agility, reflexes, aim, balance</td><td>Firearms, stealth, initiative, finesse</td></tr>
+        <tr><td>Constitution</td><td>Endurance and bodily resilience</td><td>Grit, poison, disease, exhaustion, harsh travel</td></tr>
+        <tr><td>Intelligence</td><td>Knowledge, reasoning, technical skill</td><td>Old Ones tech, investigation, lore, engineering</td></tr>
+        <tr><td>Wisdom</td><td>Perception, instinct, spiritual sensitivity</td><td>Insight, survival, resisting fear, sensing the Beam</td></tr>
+        <tr><td>Charisma</td><td>Presence, leadership, force of soul</td><td>Persuasion, performance, command, prophecy</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Recommended method: start all six scores at <strong>8</strong> and spend <strong>27 points</strong>.
+      You cannot raise a score above <strong>15</strong> before bonuses.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Final Score</th>
+          <th>Point Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>8</td><td>0</td></tr>
+        <tr><td>9</td><td>1</td></tr>
+        <tr><td>10</td><td>2</td></tr>
+        <tr><td>11</td><td>3</td></tr>
+        <tr><td>12</td><td>4</td></tr>
+        <tr><td>13</td><td>5</td></tr>
+        <tr><td>14</td><td>7</td></tr>
+        <tr><td>15</td><td>9</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Build Type</th>
+          <th>Scores Before Bonuses</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Focused Hero</td><td>15, 15, 15, 8, 8, 8</td><td>Specialized characters with clear weaknesses</td></tr>
+        <tr><td>Balanced Adventurer</td><td>15, 14, 13, 12, 10, 8</td><td>Recommended default</td></tr>
+        <tr><td>Broad Survivor</td><td>14, 14, 13, 12, 10, 10</td><td>Skill-heavy or roleplay-heavy characters</td></tr>
+        <tr><td>Jack-of-All-Worlds</td><td>13, 13, 13, 12, 12, 12</td><td>Strange or broad concepts</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Fast alternate method:</strong> 15, 14, 13, 12, 10, 8.</p>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Step 4: Choose Background, Ethos, Gear, And Scar</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Background</th>
+          <th>Description</th>
+          <th>Possible Benefits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Exiled Knight of Gilead</td><td>Trained under a fallen code, cast out or left behind</td><td>Firearms, History, Intimidation, Survival</td></tr>
+        <tr><td>Calla Farmer</td><td>Borderland survivor from a threatened village</td><td>Animal Handling, Survival, Athletics</td></tr>
+        <tr><td>Traveler from New York</td><td>Pulled from Keystone Earth or a nearby level of reality</td><td>Persuasion, Streetwise, History</td></tr>
+        <tr><td>Thunderclap Escapee</td><td>Former prisoner, Breaker, or witness of the Red’s machinery</td><td>Insight, psychic lore, Stealth</td></tr>
+        <tr><td>Choir Runaway</td><td>Your voice had power, and someone tried to own it</td><td>Performance, Insight, Persuasion</td></tr>
+        <tr><td>Road Medic</td><td>You learned to stitch wounds in bad places</td><td>Medicine, Survival, medical tools</td></tr>
+      </tbody>
+    </table>
+    <h3>Ethos</h3>
+    <ul>
+      <li><strong>White:</strong> Serve creation, mercy, truth, sacrifice, or the Beam.</li>
+      <li><strong>Gray:</strong> Survive, protect your own, and choose case by case.</li>
+      <li><strong>Red:</strong> Seek power, corruption, cruelty, or Discordia.</li>
+    </ul>
+    <h3>Personal Scar Examples</h3>
+    <ul>
+      <li>A bullet wound that aches near thinnies</li>
+      <li>A song you cannot stop humming</li>
+      <li>A dead sibling who appears in mirrors</li>
+      <li>A memory you gave away and cannot recover</li>
+      <li>A voice in your head that sounds like you, but older</li>
+    </ul>
+    <h3>Every Character Should Begin With</h3>
+    <ul>
+      <li>One primary weapon or focus</li>
+      <li>One backup weapon or defensive tool</li>
+      <li>Travel clothes or armor</li>
+      <li>Basic supplies for the road</li>
+      <li>One personal keepsake</li>
+      <li>Any tools granted by archetype or background</li>
+    </ul>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Step 5: Calculate Derived Stats</p>
+    <h3>Ability Modifiers</h3>
+    <p><strong>Modifier = floor((Ability Score - 10) / 2)</strong></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Ability Score</th>
+          <th>Modifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>8–9</td><td>-1</td></tr>
+        <tr><td>10–11</td><td>+0</td></tr>
+        <tr><td>12–13</td><td>+1</td></tr>
+        <tr><td>14–15</td><td>+2</td></tr>
+        <tr><td>16–17</td><td>+3</td></tr>
+        <tr><td>18–19</td><td>+4</td></tr>
+        <tr><td>20–21</td><td>+5</td></tr>
+      </tbody>
+    </table>
+    <h3>Grit / HP</h3>
+    <p><strong>Level 1 Grit = Archetype Hit Die maximum + Constitution modifier</strong></p>
+    <h3>Proficiency Bonus</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>Bonus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1–4</td><td>+2</td></tr>
+        <tr><td>5–8</td><td>+3</td></tr>
+        <tr><td>9–12</td><td>+4</td></tr>
+        <tr><td>13–16</td><td>+5</td></tr>
+        <tr><td>17–20</td><td>+6</td></tr>
+      </tbody>
+    </table>
+    <h3>Armor Class</h3>
+    <ul>
+      <li><strong>Unarmored:</strong> 10 + Dexterity modifier</li>
+      <li><strong>Armored:</strong> Armor value + Dexterity modifier, unless stated otherwise</li>
+    </ul>
+    <h3>Ka Points</h3>
+    <p>
+      Most characters begin with <strong>1 Ka Point</strong>, hold a maximum of{' '}
+      <strong>3</strong>, and refresh to <strong>1</strong> at the start of a session if empty.
+    </p>
+    <ul>
+      <li>Reroll a d20 after seeing the result</li>
+      <li>Spend 2 Ka to turn catastrophe into survival, with GM approval</li>
+      <li>Ask the GM for a stroke of luck, clue, or narrow escape</li>
+      <li>Donate 1 Ka to another member of the ka-tet when the bond justifies it</li>
+    </ul>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Step 6: Choose Starting Features, Powers, And Equipment</p>
+    <p>At minimum, record:</p>
+    <ul>
+      <li>Hit Die and primary stats</li>
+      <li>Saving throw proficiencies and skill choices</li>
+      <li>Weapon and armor proficiencies</li>
+      <li>Level 1 archetype features</li>
+      <li>Any spellcasting, powers, charges, blood reserve, or similar resource system</li>
+      <li>Starting weapons, armor, tools, supplies, and subclass choice if starting at Level 3+</li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Starting Level</th>
+          <th>Why Use It</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Fragile origin-story play</td></tr>
+        <tr><td>2</td><td>Characters who already survived one major ordeal</td></tr>
+        <tr><td>3</td><td>Best default for demos and public games</td></tr>
+        <tr><td>5</td><td>Experienced groups or cinematic one-shots</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Step 7: Create Your Ka-Tet Bond</p>
+    <p>
+      The party is not just a group of adventurers. It is a ka-tet: one made from many. Every
+      character should define at least one bond with another PC.
+    </p>
+    <ul>
+      <li>Which member of the ka-tet saved your life?</li>
+      <li>Which member do you not fully trust, and why?</li>
+      <li>Which member reminds you of someone you lost?</li>
+      <li>Which member knows a secret you wish they did not?</li>
+      <li>Which member do you believe ka wants you to protect?</li>
+      <li>Which member might one day be forced to kill you?</li>
+    </ul>
+    <h3>Khef Exercise</h3>
+    <ol>
+      <li>What did your character contribute to the group's survival before the campaign began?</li>
+      <li>What does your character rely on another member of the ka-tet for?</li>
+    </ol>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Step 8: Finish Your Backstory</p>
+    <p>
+      A good starting backstory is <strong>one to three paragraphs</strong> and answers:
+    </p>
+    <ul>
+      <li>Where are you from?</li>
+      <li>What did you lose?</li>
+      <li>What do you want?</li>
+      <li>What do you fear?</li>
+      <li>What strange thing marked you?</li>
+      <li>Why are you willing to walk with this ka-tet?</li>
+      <li>What would tempt you away from the Beam?</li>
+    </ul>
+    <p><strong>Backstory template:</strong></p>
+    <p>
+      <em>
+        [Name] came from [world/time/place], where they lived as [background]. Their life changed
+        when [inciting event]. Since then, they have carried [scar, secret, relic, guilt, curse,
+        or memory]. They follow the Beam because [motivation], but they fear [inner truth]. Their
+        bond with the ka-tet began when [shared survival moment].
+      </em>
+    </p>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Example Character Creation</p>
+    <h2>Naomi Blueglass</h2>
+    <p>
+      Naomi Blueglass is a runaway choir singer from 1977 Keystone Earth. She heard a second voice
+      beneath her own during a church solo, and that voice whispered the names of worlds she had
+      never seen.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Ability</th>
+          <th>Score</th>
+          <th>Modifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Strength</td><td>8</td><td>-1</td></tr>
+        <tr><td>Dexterity</td><td>12</td><td>+1</td></tr>
+        <tr><td>Constitution</td><td>13</td><td>+1</td></tr>
+        <tr><td>Intelligence</td><td>10</td><td>+0</td></tr>
+        <tr><td>Wisdom</td><td>14</td><td>+2</td></tr>
+        <tr><td>Charisma</td><td>15</td><td>+2</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li><strong>Background:</strong> Choir Runaway</li>
+      <li><strong>Ethos:</strong> White, though she doubts herself</li>
+      <li><strong>Personal Scar:</strong> Her throat glows faintly blue when thinnies are near</li>
+      <li><strong>Starting Keepsake:</strong> A cracked church hymnal with one page that rewrites itself</li>
+    </ul>
+    <p>
+      Naomi Blueglass ran from a world that told her miracles belonged to men behind pulpits. Her
+      voice broke glass, calmed animals, and made dying people smile. When a door opened in the
+      back of an abandoned train station, she followed the hum through and woke beneath the wrong
+      stars.
+    </p>
+  </section>
+
   <section class="split">
     <div class="section content-prose">
-      <p class="section-label">Bond Questions</p>
+      <p class="section-label">Final Review Checklist</p>
       <ul>
-        <li>Which member of the tet reminds you of someone you failed before?</li>
-        <li>Whose survival feels non-negotiable to you?</li>
-        <li>Who do you trust with your secret, and why?</li>
+        <li>Name, level, archetype, and subclass/path if applicable</li>
+        <li>World of origin, background, and ethos</li>
+        <li>Ability scores, modifiers, Grit/HP, AC, and proficiency bonus</li>
+        <li>Saving throws, skills, attacks, gear, and Ka Points</li>
+        <li>Archetype features, powers, charges, or songs if applicable</li>
+        <li>Personal scar, ka-tet bond, and short backstory</li>
+        <li>GM approval for unusual origins, relics, powers, or secrets</li>
       </ul>
     </div>
     <div class="section content-prose">
-      <p class="section-label">Example Character</p>
-      <p>
-        Naomi Blueglass is a Singer from 1987 Harlem whose voice bends fear into stillness. Her
-        bond says she hears the same unfinished melody in one other party member, and she refuses
-        to let them face it alone.
-      </p>
+      <p class="section-label">Common Mistakes</p>
+      <ul>
+        <li>Forgetting to add Constitution modifier to Grit/HP</li>
+        <li>Choosing an archetype without a strong primary stat</li>
+        <li>Forgetting Ka Points or proficiency bonus</li>
+        <li>Writing a backstory so long the GM cannot use it</li>
+        <li>Choosing gear without practical supplies</li>
+        <li>Making a lone-wolf character with no reason to stay in the ka-tet</li>
+      </ul>
     </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Next Steps</p>
+    <CardGrid
+      cards={[
+        {
+          title: 'Archetypes',
+          summary: 'Compare classes, complexity, and combat roles before you lock your build.',
+          href: '/player-guide/archetypes',
+          audience: 'player',
+        },
+        {
+          title: 'Ka Points',
+          summary: 'Read the signature fate mechanic before your first session.',
+          href: '/player-guide/rules/ka-points',
+          audience: 'player',
+        },
+        {
+          title: 'Core Rules',
+          summary: 'Review ability checks, combat basics, fear, and travel.',
+          href: '/player-guide/rules',
+          audience: 'player',
+        },
+        {
+          title: 'Character Sheet Download',
+          summary: 'Grab a printable sheet for live play or session zero prep.',
+          href: '/downloads/character-sheet.md',
+          audience: 'public',
+        },
+      ]}
+    />
   </section>
 </ContentLayout>

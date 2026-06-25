@@ -34,15 +34,39 @@ subclasses:
   - name: "Voice of Eld"
     summary: "Protective, noble, and rallying songs."
     theme: "Hope, command, courage, protection."
-    features: []
+    features:
+      - name: "Choral Guard"
+        level: 3
+        summary: "Your battle song protects as much as it inspires."
+        rules_text: "Layer armor and steadiness onto allied courage so the whole room feels harder to break."
+      - name: "Rallying Cry"
+        level: 3
+        summary: "Move an ally with your voice before fear catches them."
+        rules_text: "Grant a teammate momentum, temporary resilience, and permission to act like hope still matters."
   - name: "Weaver of Wounds"
     summary: "A Singer who manipulates pain, healing, and sorrow."
     theme: "Grief, repair, sacrifice."
-    features: []
+    features:
+      - name: "Echo Stitch"
+        level: 3
+        summary: "Every act of healing tugs pain somewhere else."
+        rules_text: "Turn restorative magic into psychic backlash for enemies and let grief itself become part of your toolkit."
+      - name: "Sorrow Chorus"
+        level: 3
+        summary: "The closer someone is to death, the stronger your mercy gets."
+        rules_text: "Deepen emergency healing and make low-hit-point rescue feel like your natural home turf."
   - name: "Screamer of the Prim"
     summary: "A dangerous voice that touches chaos directly."
     theme: "Fear, rupture, sonic horror."
-    features: []
+    features:
+      - name: "Rupture Note"
+        level: 3
+        summary: "Your voice can wound reality as easily as a person."
+        rules_text: "Shift from support into destabilizing force and let songs become pressure waves, panic triggers, or structural damage."
+      - name: "Prim Feedback"
+        level: 7
+        summary: "What hears you too deeply may come apart."
+        rules_text: "Punish concentration, shatter composure, and make enemies feel the cost of standing inside your sound."
 starting_equipment:
   - "Instrument, microphone relic, or vocal focus"
   - "Songbook or memory chain"
@@ -69,3 +93,7 @@ Singers turn the emotional tone of a scene into mechanics. They are equal parts 
 ## Best fit
 
 Choose the Singer if you want your class fantasy to affect both the fight and the fiction around it. A Singer can heal the group, terrify a room, or turn one lyric into a campaign-defining omen.
+
+## Story pressure
+
+Singers change the emotional temperature of scenes. The real question is not whether your voice works. It is what it costs to be heard by the world this clearly.

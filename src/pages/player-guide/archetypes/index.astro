@@ -1,23 +1,123 @@
 ---
-import { getCollection } from 'astro:content';
-import ArchetypeCard from '../../../components/ArchetypeCard.astro';
+import CardGrid from '../../../components/CardGrid.astro';
 import ContentLayout from '../../../layouts/ContentLayout.astro';
 
-const archetypes = await getCollection('archetypes');
+const featuredArchetypes = [
+  {
+    title: 'Gunslinger',
+    summary: 'A mythic revolver knight, duelist, protector, and remnant of a fallen order.',
+    href: '/player-guide/archetypes/gunslinger/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Walker',
+    summary: 'A road-wise traveler who senses doors, thinnies, paths, and impossible distances.',
+    href: '/player-guide/archetypes/walker/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Singer',
+    summary: 'A voice of harmony, sorrow, command, healing, or destruction.',
+    href: '/player-guide/archetypes/singer/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Tech-Knight',
+    summary: 'A scavenger-engineer, relic hacker, gadget fighter, and heir to the broken machines of the Old Ones.',
+    href: '/player-guide/archetypes/tech-knight/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Demon-Blooded',
+    summary: 'A person marked by the Prim, demon blood, forbidden pact, or inherited corruption.',
+    href: '/player-guide/archetypes/demon-blooded/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Touch-Bearer',
+    summary: 'A psychic, empath, seer, dreamer, telepath, or wounded soul marked by the Touch.',
+    href: '/player-guide/archetypes/touch-bearer/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Hemophage',
+    summary: 'A blood-hungry survivor caught between predator, parasite, and person.',
+    href: '/player-guide/archetypes/hemophage/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Protocol Shell',
+    summary: 'A machine relic from the Age Before, still walking after the world that made it died.',
+    href: '/player-guide/archetypes/protocol-shell/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Tongue of Discord',
+    summary: 'A silver-tongued manipulator whose voice bends minds, allegiance, fear, and truth.',
+    href: '/player-guide/archetypes/tongue-of-discord/',
+    audience: 'player' as const,
+  },
+  {
+    title: 'Shard-Bound',
+    summary: 'A fractured soul carrying multiple selves, voices, spirits, past lives, or alien fragments.',
+    href: '/player-guide/archetypes/shard-bound/',
+    audience: 'player' as const,
+  },
+];
 ---
 
 <ContentLayout
   title="Archetypes"
-  summary="Choose your class by fantasy, complexity, combat role, and what kind of story pressure you want to carry."
+  summary="Choose your class by fantasy, complexity, combat role, story pressure, and the kind of trouble you want ka to put in your hands."
   eyebrow="Player options"
   audience="player"
+  ctaPrimary={{ label: 'Create Your Character', href: '/player-guide/character-creation/' }}
+  ctaSecondary={{ label: 'Download Character Sheet', href: '/downloads/character-sheet.md' }}
 >
   <section class="section content-prose">
-    <p class="section-label">What Are Archetypes?</p>
-    <p>
-      Archetypes are both your mechanical chassis and your dramatic angle. Pick the one that sounds
-      fun to play in a fight and compelling to live with between fights.
+    <p class="content-lead">
+      In <strong>Ka-Tet: The Path of the Beam</strong>, character classes are called{' '}
+      <strong>Archetypes</strong>. Your archetype is both your mechanical chassis and your dramatic
+      angle. It tells the table what you are good at, what kind of danger follows you, and how the
+      Beam has marked you.
     </p>
+    <p>
+      Some archetypes are straightforward: the <strong>Gunslinger</strong> shoots first, stands
+      firm, and carries the burden of the old code. Others ask more from the player: the{' '}
+      <strong>Singer</strong> manages songs and support magic, the <strong>Walker</strong> bends
+      travel and distance, and the <strong>Shard-Bound</strong> shifts between inner selves.
+    </p>
+    <p>
+      Pick the one that sounds fun to play in a fight and compelling to live with between fights.
+    </p>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Quick Advice</p>
+      <p>
+        For a first game or public demo, start with <strong>Gunslinger</strong>,{' '}
+        <strong>Walker</strong>, <strong>Singer</strong>, <strong>Tech-Knight</strong>, or{' '}
+        <strong>Touch-Bearer</strong>.
+      </p>
+      <p>
+        Save <strong>Hemophage</strong>, <strong>Tongue of Discord</strong>,{' '}
+        <strong>Demon-Blooded</strong>, <strong>Protocol Shell</strong>, and{' '}
+        <strong>Shard-Bound</strong> for players who want stronger story complications or more
+        mechanical complexity.
+      </p>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">What An Archetype Gives You</p>
+      <ul>
+        <li>Your Hit Die and starting Grit/HP</li>
+        <li>Your primary stats and saving throw proficiencies</li>
+        <li>Your starting weapons, armor, tools, and skills</li>
+        <li>Your level 1 features and later subclass/path choice</li>
+        <li>Your role in combat, travel, investigation, and ka-tet scenes</li>
+        <li>The kind of moral or supernatural pressure the GM can bring into your story</li>
+      </ul>
+    </div>
   </section>
 
   <section class="section content-prose">
@@ -28,32 +128,231 @@ const archetypes = await getCollection('archetypes');
           <th>Archetype</th>
           <th>Complexity</th>
           <th>Primary Stats</th>
+          <th>Hit Die</th>
           <th>Combat Role</th>
+          <th>Story Pressure</th>
+          <th>Best For</th>
         </tr>
       </thead>
       <tbody>
-        {archetypes.map((entry) => (
-          <tr>
-            <td>{entry.data.title}</td>
-            <td>{entry.data.complexity}</td>
-            <td>{entry.data.primary_stats.join(', ')}</td>
-            <td>{entry.data.combat_role}</td>
-          </tr>
-        ))}
+        <tr><td>Gunslinger</td><td>Medium</td><td>Dexterity, Wisdom</td><td>d10</td><td>Precision striker / ranged duelist</td><td>The old code, leadership, guilt</td><td>Iconic western action</td></tr>
+        <tr><td>Walker</td><td>Medium-High</td><td>Wisdom, Constitution, Dexterity</td><td>d8</td><td>Mobile scout / survival guide</td><td>Thinny exposure, strange roads</td><td>Exploration and movement</td></tr>
+        <tr><td>Singer</td><td>High</td><td>Charisma, Wisdom</td><td>d8</td><td>Support caster / controller</td><td>Voice, harmony, grief</td><td>Magic, support, and drama</td></tr>
+        <tr><td>Tech-Knight</td><td>Medium-High</td><td>Intelligence, Dexterity</td><td>d8</td><td>Gadget fighter / tech problem-solver</td><td>Relics, malfunction, repair</td><td>Tools, tech, tactical utility</td></tr>
+        <tr><td>Demon-Blooded</td><td>High</td><td>Charisma, Constitution</td><td>d8</td><td>Blaster / wildcard</td><td>Corruption, temptation, Prim influence</td><td>Dangerous power</td></tr>
+        <tr><td>Touch-Bearer</td><td>Medium-High</td><td>Wisdom, Charisma</td><td>d8</td><td>Psychic seer / mental support</td><td>Visions, empathy, overload</td><td>Prophecy and emotional insight</td></tr>
+        <tr><td>Hemophage</td><td>High</td><td>Charisma, Dexterity, Constitution</td><td>d10</td><td>Predator / self-healing skirmisher</td><td>Hunger, secrecy, restraint</td><td>Antiheroes and body horror</td></tr>
+        <tr><td>Protocol Shell</td><td>Medium-High</td><td>Intelligence, Dexterity or Constitution</td><td>d8</td><td>Durable utility / support</td><td>Machine identity, memory fragments</td><td>Robots and relics</td></tr>
+        <tr><td>Tongue of Discord</td><td>High</td><td>Charisma, Wisdom</td><td>d8</td><td>Social controller / manipulator</td><td>Compulsion, lies, corruption</td><td>Social power and dangerous words</td></tr>
+        <tr><td>Shard-Bound</td><td>Very High</td><td>Wisdom, Charisma, varies by Persona</td><td>d8</td><td>Adaptive switch-hitter</td><td>Fractured identity, inner conflict</td><td>Experienced players who like complexity</td></tr>
       </tbody>
     </table>
   </section>
 
-  <section class="card-grid">
-    {archetypes.map((entry) => (
-      <ArchetypeCard
-        title={entry.data.title}
-        summary={entry.data.summary}
-        href={`/player-guide/archetypes/${entry.data.slug}/`}
-        primaryStats={entry.data.primary_stats}
-        complexity={entry.data.complexity}
-        combatRole={entry.data.combat_role}
-      />
-    ))}
+  <section class="section content-prose">
+    <p class="section-label">Choose By Playstyle</p>
+    <ul>
+      <li><strong>Shoot, duel, protect, and lead:</strong> Gunslinger</li>
+      <li><strong>Survive the road, read the land, and keep the party moving:</strong> Walker</li>
+      <li><strong>Heal, inspire, calm madness, or fight with music:</strong> Singer</li>
+      <li><strong>Repair old machines, use gadgets, and solve tech problems:</strong> Tech-Knight</li>
+      <li><strong>Wield forbidden power with a cost:</strong> Demon-Blooded</li>
+      <li><strong>See visions, sense danger, and read emotional truth:</strong> Touch-Bearer</li>
+      <li><strong>Play a monster trying not to become one:</strong> Hemophage</li>
+      <li><strong>Play a machine relic with lost directives and strange memory:</strong> Protocol Shell</li>
+      <li><strong>Weaponize speech, lies, command, and fear:</strong> Tongue of Discord</li>
+      <li><strong>Play multiple selves inside one body:</strong> Shard-Bound</li>
+    </ul>
+    <p>
+      If someone asks to play a <strong>Breaker</strong>, the safest player-facing answer is: use
+      <strong> Touch-Bearer</strong> unless the GM has approved a special Breaker build. Breakers
+      are usually stronger as NPCs or narrative-tier psychics.
+    </p>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Archetype Cards</p>
+    <CardGrid cards={featuredArchetypes} />
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Archetype Snapshots</p>
+
+    <h2>Gunslinger</h2>
+    <p>
+      A mythic revolver knight, duelist, protector, and remnant of a fallen order. Play a
+      Gunslinger if you want iconic western action, grim codes of honor, and a clear combat anchor
+      for the ka-tet.
+    </p>
+    <ul>
+      <li><strong>Complexity:</strong> Medium</li>
+      <li><strong>Hit Die:</strong> d10</li>
+      <li><strong>Primary Stats:</strong> Dexterity and Wisdom</li>
+      <li><strong>Combat Role:</strong> Precision striker, ranged duelist, battlefield leader</li>
+      <li><strong>Story Pressure:</strong> The old code, leadership, violence, guilt</li>
+    </ul>
+
+    <h2>Walker</h2>
+    <p>
+      A road-wise traveler who senses doors, thinnies, paths, and impossible distances. Play a
+      Walker if you want to be the person who gets the group where it needs to go when the road
+      stops making sense.
+    </p>
+    <ul>
+      <li><strong>Complexity:</strong> Medium-High</li>
+      <li><strong>Hit Die:</strong> d8</li>
+      <li><strong>Primary Stats:</strong> Wisdom and Constitution</li>
+      <li><strong>Combat Role:</strong> Mobile skirmisher, survival support, terrain controller</li>
+      <li><strong>Story Pressure:</strong> Thinny exposure, strange roads, impossible choices</li>
+    </ul>
+
+    <h2>Singer</h2>
+    <p>
+      A voice of harmony, sorrow, command, healing, or destruction. Play a Singer if you want
+      bard-style magic with darker resonance, emotional scenes, and support power that feels mythic.
+    </p>
+    <ul>
+      <li><strong>Complexity:</strong> High</li>
+      <li><strong>Hit Die:</strong> d8</li>
+      <li><strong>Primary Stats:</strong> Charisma and Wisdom</li>
+      <li><strong>Combat Role:</strong> Support caster, healer, controller, morale engine</li>
+      <li><strong>Story Pressure:</strong> Voice, emotion, healing, harmony, grief</li>
+    </ul>
+
+    <h2>Tech-Knight</h2>
+    <p>
+      A scavenger-engineer, relic hacker, gadget fighter, and heir to the broken machines of the
+      Old Ones. Play a Tech-Knight if you like tools, repairs, drones, gadgets, and old-world
+      science-fantasy utility.
+    </p>
+
+    <h2>Demon-Blooded</h2>
+    <p>
+      A person marked by the Prim, demon blood, forbidden pact, or inherited corruption. Choose
+      this if you want dangerous power, visible cost, and a character who gives the GM permission
+      to tempt, haunt, or corrupt them.
+    </p>
+
+    <h2>Touch-Bearer</h2>
+    <p>
+      A psychic, empath, seer, dreamer, telepath, or wounded soul marked by the Touch. Choose this
+      if you want visions, empathy, emotional insight, and story-facing psychic pressure.
+    </p>
+
+    <h2>Hemophage</h2>
+    <p>
+      A blood-hungry survivor caught between predator, parasite, and person. Choose this if you
+      want stealth, hunger, self-healing, secrecy, and body-horror antihero pressure.
+    </p>
+
+    <h2>Protocol Shell</h2>
+    <p>
+      A machine relic from the Age Before, still walking after the world that made it died. Choose
+      this if you want a robot or artificial person whose directives, memory fragments, and
+      personhood become part of the drama.
+    </p>
+
+    <h2>Tongue of Discord</h2>
+    <p>
+      A silver-tongued manipulator whose voice bends minds, allegiance, fear, and truth. Choose
+      this if you want words to be your main weapon and are comfortable with morally dangerous
+      influence.
+    </p>
+
+    <h2>Shard-Bound</h2>
+    <p>
+      A fractured soul carrying multiple selves, voices, spirits, past lives, or alien fragments.
+      Choose this only if you want a high-complexity role with serious internal conflict and
+      mechanical tracking.
+    </p>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Archetype Selection By Party Role</p>
+      <ul>
+        <li><strong>Combat Anchor:</strong> Gunslinger, Hemophage, Tech-Knight, Demon-Blooded</li>
+        <li><strong>Support and Healing:</strong> Singer, Touch-Bearer, Caretaker-style Protocol Shell</li>
+        <li><strong>Exploration and Travel:</strong> Walker, Tech-Knight, Touch-Bearer, Protocol Shell</li>
+        <li><strong>Social and Intrigue:</strong> Singer, Tongue of Discord, Charm-style Protocol Shell</li>
+        <li><strong>Horror and Psychic Play:</strong> Touch-Bearer, Shard-Bound, Demon-Blooded, Hemophage</li>
+        <li><strong>Beginner-Friendly Picks:</strong> Gunslinger, Walker, Tech-Knight</li>
+        <li><strong>Best for Experienced Players:</strong> Singer, Demon-Blooded, Hemophage, Protocol Shell, Tongue of Discord, Shard-Bound</li>
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Archetype Selection By Primary Stat</p>
+      <ul>
+        <li><strong>Dexterity-focused:</strong> Gunslinger, Walker, Tech-Knight, Hemophage</li>
+        <li><strong>Wisdom-focused:</strong> Walker, Singer, Touch-Bearer, Shard-Bound, Gunslinger</li>
+        <li><strong>Charisma-focused:</strong> Singer, Demon-Blooded, Tongue of Discord, Hemophage</li>
+        <li><strong>Intelligence-focused:</strong> Tech-Knight, Protocol Shell, Shard-Bound</li>
+        <li><strong>Constitution-focused:</strong> Walker, Hemophage, Demon-Blooded, defensive Protocol Shells</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Recommended Starting Stat Arrays</p>
+    <p>
+      These are quick recommendations for players using the 27-point stat-buy system from the
+      Character Creation page.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Archetype</th>
+          <th>Suggested Starting Scores</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Gunslinger</td><td>10, 15, 14, 10, 14, 8</td></tr>
+        <tr><td>Walker</td><td>10, 13, 15, 10, 14, 8</td></tr>
+        <tr><td>Singer</td><td>8, 12, 13, 10, 14, 15</td></tr>
+        <tr><td>Tech-Knight</td><td>8, 14, 13, 15, 10, 10</td></tr>
+        <tr><td>Demon-Blooded</td><td>8, 12, 14, 10, 10, 15</td></tr>
+        <tr><td>Touch-Bearer</td><td>8, 12, 13, 14, 15, 10</td></tr>
+        <tr><td>Hemophage</td><td>10, 15, 14, 8, 10, 13</td></tr>
+        <tr><td>Protocol Shell</td><td>8, 14, 13, 15, 10, 10</td></tr>
+        <tr><td>Tongue of Discord</td><td>8, 12, 13, 10, 14, 15</td></tr>
+        <tr><td>Shard-Bound</td><td>8, 13, 12, 14, 15, 10</td></tr>
+      </tbody>
+    </table>
+    <p>
+      These arrays are defaults, not hard rules. A Shard-Bound’s exact stats may vary by Persona,
+      and a Protocol Shell’s secondary stats may shift by directive.
+    </p>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Next Steps</p>
+    <CardGrid
+      cards={[
+        {
+          title: 'Character Creation',
+          summary: 'Assign stats, choose a background, calculate Grit, and bind yourself to the ka-tet.',
+          href: '/player-guide/character-creation/',
+          audience: 'player',
+        },
+        {
+          title: 'Ka Points',
+          summary: 'Learn the signature fate mechanic that keeps the story moving.',
+          href: '/player-guide/rules/ka-points/',
+          audience: 'player',
+        },
+        {
+          title: 'Downloads',
+          summary: 'Grab the character sheet, quickstart, and public-facing play aids.',
+          href: '/downloads/',
+          audience: 'public',
+        },
+        {
+          title: 'Pre-Generated Characters',
+          summary: 'See ready-to-play characters for demos and low-prep first sessions.',
+          href: '/pregens/',
+          audience: 'public',
+        },
+      ]}
+    />
   </section>
 </ContentLayout>

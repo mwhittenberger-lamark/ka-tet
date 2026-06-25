@@ -5,15 +5,43 @@ import ContentLayout from '../../layouts/ContentLayout.astro';
 
 <ContentLayout
   title="Player Guide"
-  summary="The player-facing rules hub for character creation, archetypes, core mechanics, and campaign-safe references."
+  summary="The player-facing rules hub for character creation, archetypes, ka, combat, travel, and the strange rules of the road."
   eyebrow="Player reference"
   audience="player"
 >
   <section class="section content-prose">
     <p class="content-lead">
-      This guide is organized for table use. Start with character creation if you are building
-      from scratch, or jump to pregens and Ka Points if you are joining a demo quickly.
+      This guide is organized for table use rather than cover-to-cover reading. Start with
+      character creation if you are building from scratch, or jump to pregens and Ka Points if you
+      are joining a demo quickly.
     </p>
+    <p>
+      The book’s core player-facing loop is simple: build a wanderer, choose an archetype, learn
+      what your Ka Points can do, and get comfortable with the rules for firearms, fear, travel,
+      and strange powers. Everything else is there to help those scenes land.
+    </p>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Best Reading Order</p>
+      <ol>
+        <li>Read <strong>Character Creation</strong> to build your concept and sheet.</li>
+        <li>Use <strong>Archetypes</strong> to choose the class fantasy that fits you.</li>
+        <li>Learn <strong>Ka Points</strong> before your first session.</li>
+        <li>Skim <strong>Combat</strong>, <strong>Firearms</strong>, and <strong>Travel</strong>.</li>
+        <li>Check <strong>Downloads</strong> for quick references and pregens.</li>
+      </ol>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">What Matters Most At The Table</p>
+      <ul>
+        <li>The ka-tet is more important than solo heroics.</li>
+        <li>Guns are deadly, loud, and often rare.</li>
+        <li>The road itself is part of the game, not dead air between fights.</li>
+        <li>Magic exists, but it should feel costly, strange, or mythic.</li>
+      </ul>
+    </div>
   </section>
 
   <section class="section">
@@ -21,34 +49,33 @@ import ContentLayout from '../../layouts/ContentLayout.astro';
       cards={[
         {
           title: 'Character Creation',
-          summary: 'Follow the six-step path from concept to stats, gear, and ka-tet bonds.',
+          summary: 'Follow the six-step path from concept to stats, gear, scars, and ka-tet bonds.',
           href: '/player-guide/character-creation',
           audience: 'player',
         },
         {
           title: 'Archetypes',
-          summary: 'Compare classes by fantasy, complexity, and combat role.',
+          summary: 'Compare all ten classes by fantasy, complexity, combat role, and story pressure.',
           href: '/player-guide/archetypes',
           audience: 'player',
         },
         {
           title: 'Core Rules',
-          summary: 'Read the most-used mechanics, including firearms, fear, and travel.',
+          summary: 'Read the most-used mechanics, including firearms, fear, powers, and travel.',
           href: '/player-guide/rules',
           audience: 'player',
         },
         {
           title: 'Ka Points',
-          summary: 'Learn the signature fate engine and how the tet shares it.',
+          summary: 'Learn the signature fate engine, how luck refreshes, and when the tet can share it.',
           href: '/player-guide/rules/ka-points',
           audience: 'player',
         },
         {
-          title: 'Campaigns',
-          summary: 'Stay in player-safe territory while getting the pitch for Johnny Minor.',
-          href: '/campaigns/johnny-minor',
+          title: 'Lore',
+          summary: 'Learn the Tower, the Beams, Mid-World, gunslingers, thinnies, and the White.',
+          href: '/lore',
           audience: 'player',
-          spoilerLevel: 'light',
         },
         {
           title: 'Downloads',

@@ -33,6 +33,7 @@ const relatedRules = (await getCollection('rules')).filter((rule) =>
         <span>Secondary: {entry.data.secondary_stats.join(', ')}</span>
         <span>Hit Die: {entry.data.starting_hit_die}</span>
         <span>Saves: {entry.data.saving_throws.join(', ')}</span>
+        <span>Complexity: {entry.data.complexity}</span>
       </div>
     </div>
     <div class="section content-prose">
@@ -41,7 +42,26 @@ const relatedRules = (await getCollection('rules')).filter((rule) =>
         <li><strong>Combat:</strong> {entry.data.combat_role}</li>
         <li><strong>Narrative:</strong> {entry.data.narrative_role}</li>
         <li><strong>Support:</strong> {entry.data.support_role}</li>
-        <li><strong>Complexity:</strong> {entry.data.complexity}</li>
+        <li><strong>Tags:</strong> {entry.data.tags.join(', ')}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Best For</p>
+      <ul>
+        {entry.data.recommended_for.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Maybe Skip If</p>
+      <ul>
+        {entry.data.not_recommended_for.map((item) => (
+          <li>{item}</li>
+        ))}
       </ul>
     </div>
   </section>
@@ -65,6 +85,15 @@ const relatedRules = (await getCollection('rules')).filter((rule) =>
           <h3>{subclass.name}</h3>
           <p>{subclass.summary}</p>
           <p><strong>Theme:</strong> {subclass.theme}</p>
+          {subclass.features.length > 0 && (
+            <ul>
+              {subclass.features.map((feature) => (
+                <li>
+                  <strong>{feature.name} · Level {feature.level}:</strong> {feature.summary} {feature.rules_text}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       ))}
     </div>
@@ -89,15 +118,17 @@ const relatedRules = (await getCollection('rules')).filter((rule) =>
     <Content />
   </article>
 
-  <section class="section">
-    <p class="section-label">Related Rules</p>
-    <CardGrid
-      cards={relatedRules.map((rule) => ({
-        title: rule.data.title,
-        summary: rule.data.summary,
-        href: `/player-guide/rules/${rule.data.slug}/`,
-        audience: 'player' as const,
-      }))}
-    />
-  </section>
+  {relatedRules.length > 0 && (
+    <section class="section">
+      <p class="section-label">Related Rules</p>
+      <CardGrid
+        cards={relatedRules.map((rule) => ({
+          title: rule.data.title,
+          summary: rule.data.summary,
+          href: `/player-guide/rules/${rule.data.slug}/`,
+          audience: 'player' as const,
+        }))}
+      />
+    </section>
+  )}
 </ContentLayout>

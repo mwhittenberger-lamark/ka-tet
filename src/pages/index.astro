@@ -4,7 +4,10 @@ import CardGrid from '../components/CardGrid.astro';
 import QuoteCallout from '../components/QuoteCallout.astro';
 import ContentLayout from '../layouts/ContentLayout.astro';
 
-const archetypes = (await getCollection('archetypes')).slice(0, 3);
+const archetypes = await getCollection('archetypes');
+const featuredArchetypes = ['gunslinger', 'walker', 'singer', 'tech-knight']
+  .map((slug) => archetypes.find((entry) => entry.data.slug === slug))
+  .filter(Boolean);
 ---
 
 <ContentLayout
@@ -15,35 +18,55 @@ const archetypes = (await getCollection('archetypes')).slice(0, 3);
   ctaPrimary={{ label: 'Join a Demo Game', href: '/join-a-game' }}
   ctaSecondary={{ label: 'Start Here', href: '/start-here' }}
 >
-  <section class="section content-prose">
-    <p class="content-lead">
-      Ka-Tet is built to function as a public pitch site, a player rules reference, and a GM
-      archive for a strange-road campaign full of prophecy, old codes, cosmic horror, and
-      impossible music.
-    </p>
-    <p>
-      At the table, players form a ka-tet bound by fate. They travel broken worlds, protect what
-      still matters, and decide whether the Tower, the Beams, and the song beneath reality can
-      still be saved.
-    </p>
-    <div class="button-row">
-      <a class="button button--ghost" href="/pregens">Pick a Pre-Gen</a>
-      <a class="button button--ghost" href="/downloads/player-quickstart.md">Read the Quickstart</a>
+  <section class="split">
+    <div class="section content-prose">
+      <p class="section-label">Why This Hits</p>
+      <p class="content-lead">
+        This is a weird-western RPG about fate, gun smoke, broken roads, haunted machines, and the
+        stubborn choice to protect something in a world that keeps trying to come apart.
+      </p>
+      <p>
+        At the table, players form a ka-tet bound by destiny. You move through Mid-World and
+        stranger places beyond it, face gunfights and cosmic wrongness, and decide whether the
+        Tower, the Beams, and the people caught between them are still worth saving.
+      </p>
+      <div class="button-row">
+        <a class="button button--ghost" href="/pregens">Pick a Pre-Gen</a>
+        <a class="button button--ghost" href="/downloads/player-quickstart.md">Read the Quickstart</a>
+      </div>
+    </div>
+    <div class="section content-prose home-panel">
+      <p class="section-label">At A Glance</p>
+      <div class="check-list">
+        <span>Weird western horror</span>
+        <span>Player-safe lore</span>
+        <span>Fast onboarding</span>
+        <span>Ka-driven teamwork</span>
+        <span>Guns, songs, doors</span>
+        <span>Demo ready</span>
+      </div>
+      <div class="home-stat-grid">
+        <article>
+          <strong>5 min</strong>
+          <p>to understand the premise</p>
+        </article>
+        <article>
+          <strong>1 session</strong>
+          <p>to feel the tone and rules</p>
+        </article>
+        <article>
+          <strong>0 homework</strong>
+          <p>required to join a one-shot</p>
+        </article>
+      </div>
+      <p class="home-note">
+        New players are welcome. No prior Dark Tower knowledge required.
+      </p>
     </div>
   </section>
 
-  <section class="section content-prose">
-    <p class="section-label">Looking for Players</p>
-    <h2>Ka-Tet is open for demo one-shots and future campaign groups.</h2>
-    <p>
-      New players are welcome. No Dark Tower knowledge required. If you want the tone first and
-      the rules second, this site is built to get you to the table fast.
-    </p>
-    <p><strong>Next demo date:</strong> To be announced.</p>
-  </section>
-
   <section class="section">
-    <p class="section-label">Start Here</p>
+    <p class="section-label">Choose Your Door</p>
     <CardGrid
       cards={[
         {
@@ -76,19 +99,65 @@ const archetypes = (await getCollection('archetypes')).slice(0, 3);
 
   <section class="split">
     <div class="section content-prose">
-      <p class="section-label">What Makes It Distinct</p>
-      <h2>Dead western grit, haunted music, and cosmic decay.</h2>
+      <p class="section-label">What A Session Feels Like</p>
+      <h2>Dust, dread, loyalty, and a few moments that feel bigger than luck.</h2>
       <ul>
-        <li>Play gunslingers, singers, walkers, and strange survivors from many worlds.</li>
-        <li>Use Ka Points and bonds to turn fate and loyalty into mechanics.</li>
-        <li>Travel through doors, thinnies, failing roads, and doomed towns.</li>
-        <li>Balance mythic heroism with horror, doubt, and hard choices.</li>
+        <li>A tense arrival in a town that already sounds half-broken</li>
+        <li>Quiet campfire truth that changes the next fight completely</li>
+        <li>Violence that is fast, loud, and rarely clean</li>
+        <li>A dream, omen, or thinny that makes the road feel sentient</li>
+        <li>Hard choices about mercy, duty, hunger, power, and fate</li>
       </ul>
     </div>
+    <div class="section content-prose">
+      <p class="section-label">What Makes It Distinct</p>
+      <h2>Not just fantasy with revolvers.</h2>
+      <ul>
+        <li>Ka Points make destiny playable without drowning the game in metacurrency.</li>
+        <li>The road matters as much as the fight: travel, weather, hunger, and strange geography all shape play.</li>
+        <li>Magic feels haunted, rare, and costly instead of bright and routine.</li>
+        <li>The setting supports both public demos and longer campaign arcs without forcing lore homework.</li>
+      </ul>
+      <div class="tag-list">
+        <span>ka</span>
+        <span>the beams</span>
+        <span>mid-world</span>
+        <span>thinnies</span>
+        <span>gunslingers</span>
+        <span>the white</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section content-prose">
+    <p class="section-label">Best First Path</p>
+    <div class="home-steps">
+      <article>
+        <span>01</span>
+        <h3>Read The Premise</h3>
+        <p>Start with the public-facing overview if you want the tone before the rules.</p>
+        <a href="/start-here">Open Start Here</a>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Choose A Character</h3>
+        <p>Either build from scratch or grab a pre-generated character and get moving fast.</p>
+        <a href="/pregens">Browse Pregens</a>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Learn The Hooks</h3>
+        <p>Skim Ka Points, firearms, and the basics of travel so the first session lands cleanly.</p>
+        <a href="/player-guide">Enter The Player Guide</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="split">
     <div class="section">
       <p class="section-label">Archetype Sampler</p>
       <CardGrid
-        cards={archetypes.map((entry) => ({
+        cards={featuredArchetypes.map((entry) => ({
           title: entry.data.title,
           summary: entry.data.summary,
           href: `/player-guide/archetypes/${entry.data.slug}/`,
@@ -97,6 +166,19 @@ const archetypes = (await getCollection('archetypes')).slice(0, 3);
           spoilerLevel: 'none' as const,
         }))}
       />
+    </div>
+    <div class="section content-prose">
+      <p class="section-label">Looking For Players</p>
+      <h2>Built for demo one-shots and future campaign groups.</h2>
+      <p>
+        This site is designed so someone can arrive cold, catch the vibe quickly, and still feel
+        like they are stepping into a real setting instead of a generic starter page.
+      </p>
+      <p>
+        If you want the tone first and the rules second, this is your door. If you want the full
+        player-facing guide, that door is open too.
+      </p>
+      <p><strong>Next demo date:</strong> To be announced.</p>
     </div>
   </section>
 
